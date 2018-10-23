@@ -114,6 +114,7 @@ var _ModuleCommon = (function () {
                     $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
                     $("#" + pageReviewData.radio).before(' <i class="fa radio-fa-check-incorrect fa-times" style="font-size:20px;color:#B22222"></i>');
                     $("#" + pageReviewData.radio).addClass("incorrect");
+                    $("#" + pageReviewData.radio).closest("label").find(".without-before").css("color","#B22222");
                     $("#" + pageDetailData.radio).before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
                     $("#" + pageDetailData.radio).addClass("correct");
                 }
@@ -156,8 +157,8 @@ var _ModuleCommon = (function () {
             if (pageDetailData.radio == radio) {
                 $("#" + pageDetailData.radio).before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
                 $("#" + pageDetailData.radio).addClass("correct");
-                $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
-            }
+                $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before");
+             }
             else {
                 $('input[type="radio"]:checked').closest("label").find("span").addClass("without-before")
                 $("#" + radio).before(' <i class="fa radio-fa-check-incorrect fa-times" style="font-size:20px;color:#B22222"></i>');
@@ -453,6 +454,7 @@ var _ModuleCommon = (function () {
                 $('input[type="radio"]:checked').closest("label").find("i").remove();
                 $("input[type='radio']").k_enable();
                 $("input[type='radio']").removeAttr("checked");
+                $("input[type='radio']").removeClass("incorrect");
             }
 
             $("#div_feedback .div_fdkcontent").html("");

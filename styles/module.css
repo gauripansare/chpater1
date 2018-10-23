@@ -391,7 +391,13 @@
     cursor: pointer;
     font-size: 16px;
 }
+#radio-elements .correct:checked + span{
+    color: #01662C !important;
+}
 
+#radio-elements .incorrect:checked + span{
+    color: #B22222 !important;
+}
 /*fa fa-times */
 .checkbox-item .fa-times {
     margin-top: 1px;
