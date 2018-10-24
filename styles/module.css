@@ -383,20 +383,24 @@
 }
 
 #radio-elements label {
-    margin-left: 1%;
-    display: block;
+    /* margin-left: 1px; */
+    /* display: block; */
     position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
+    /* padding-left: 35px; */
+    /* margin-bottom: 12px; */
     cursor: pointer;
     font-size: 16px;
 }
+
 #radio-elements .correct:checked + span{
     color: #01662C !important;
 }
 
 #radio-elements .incorrect:checked + span{
     color: #B22222 !important;
+}
+#radio-elements .correct + span{
+    color: #01662C !important;
 }
 /*fa fa-times */
 .checkbox-item .fa-times {
