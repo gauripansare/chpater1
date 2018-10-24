@@ -144,6 +144,7 @@ var _Navigator = (function () {
             this.LoadPage("p1");
         },
         LoadPage: function (pageId, jsonObj) {
+            $(".hintcontainer").hide()
             debugger;
             if (jsonObj == undefined) {
                 jsonObj = {};

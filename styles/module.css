@@ -240,7 +240,7 @@
 }
 
     /* Hide the browser's default checkbox */
-    .checkbox-item input {
+    #checkbox-elements input {
         position: absolute;
         opacity: 0;
         cursor: pointer;
@@ -298,11 +298,11 @@
             -webkit-box-sizing: border-box;
         }
 
-    #radio-elements input[type="radio"]:checked + span {
+    #radio-elements input[type="radio"]:checked + label span {
         color: #047a9c;
     }
 
-        #radio-elements input[type="radio"]:checked + span:before {
+        #radio-elements input[type="radio"]:checked + label span:before {
             content: '';
             width: 15px;
             height: 15px;
@@ -318,12 +318,12 @@
 /*Radiobutton.css*/
 
 /* On mouse-over, add a grey background color */
-.checkbox-item:hover input ~ .checkmark {
+.checkbox-item:hover input + .checkbox-item .checkmark {
     background-color: #ccc;
 }
 
 /* When the checkbox is checked, add a blue background */
-.checkbox-item input:checked ~ .checkmark {
+#checkbox-elements input:checked + .checkbox-item span {
     background-color: #047a9c;
     border: 2px solid #047a9c;
 }
@@ -336,7 +336,7 @@
 }
 
 /* Show the checkmark when checked */
-.checkbox-item input:checked ~ .checkmark:after {
+#checkbox-elements input:checked + .checkbox-item .checkmark:after {
     display: block;
 }
 
@@ -383,23 +383,23 @@
 }
 
 #radio-elements label {
-    /* margin-left: 1px; */
-    /* display: block; */
+    margin-left: 1px;
+    display: block;
     position: relative;
-    /* padding-left: 35px; */
-    /* margin-bottom: 12px; */
+    padding-left: 35px;
+    margin-bottom: 12px;
     cursor: pointer;
     font-size: 16px;
 }
 
-#radio-elements .correct:checked + span{
+#radio-elements .correct:checked + label span{
     color: #01662C !important;
 }
 
-#radio-elements .incorrect:checked + span{
+#radio-elements .incorrect:checked + label span{
     color: #B22222 !important;
 }
-#radio-elements .correct + span{
+#radio-elements .correct + label span{
     color: #01662C !important;
 }
 /*fa fa-times */
@@ -434,7 +434,7 @@
 .radio-fa-check {
     position: relative;
     bottom: -5px;
-    right: 21px;
+    right: 22px;
     float: left;
     width: 0px;
     background-color: #fff;
@@ -445,7 +445,7 @@
 .radio-fa-check-incorrect {
     position: relative;
     bottom: -1px;
-    right: 22px;
+    right: 21px;
     float: left;
     width: 0px;
     background-color: #fff;
