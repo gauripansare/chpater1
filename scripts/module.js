@@ -189,10 +189,10 @@ var _ModuleCommon = (function () {
                 rarialabel = "Correct option";
             }
             else {
-                $("input[type='radio'].correct").closest("label").find("i").attr("aria-label", "Correct option")
+                $("input[type='radio'].correct").attr("aria-label", "Correct option");
                 rarialabel = "Incorrect option selected";
             }
-            $("#" + radio).closest("label").find("i").attr("aria-label", rarialabel);
+            $("#" + radio).attr("aria-label", rarialabel);
             var chkboxarray = $("input[type='checkbox']").map(function () {
                 return $(this).attr("id");
             }).get();
@@ -202,10 +202,10 @@ var _ModuleCommon = (function () {
                 if ($("#" + chkboxarray[i]).hasClass("correct")) {
                     carialabel = "Correct option";
                 }
-                else {
+                else if($("#" + chkboxarray[i]).hasClass("incorrect")){
                     carialabel = "Incorrect option selected";
                 }
-                $("#" + chkboxarray[i]).closest("label").find("i").attr("aria-label", carialabel)
+                $("#" + chkboxarray[i]).attr("aria-label", carialabel);
             }
 
         },
@@ -539,7 +539,6 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
-
     }
 })();
 $(document).ready(function () {

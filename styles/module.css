@@ -357,7 +357,7 @@
     transform: rotate(45deg);
 }
 
-#radio-elementsp {
+#radio-elements {
     padding-top: 3%;
 }
 
@@ -780,11 +780,11 @@
     }
 
     .radio-fa-check {
-        bottom: 7px !important;
+        /*bottom: 7px !important;*/
     }
 
     .radio-fa-check-incorrect {
-        right: 13px !important;
+        /*right: 13px !important;*/
     }
 }
 .font12, .font12 *{
