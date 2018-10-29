@@ -2,6 +2,10 @@
 #header-title {
     min-height: 0px;
 }
+    .question-band.summaryoptions {
+        margin-left: 9% !important;
+    }
+}
 @media screen and (max-width : 1024px) {
 }
 
@@ -15,6 +19,7 @@
         .question-band {
             margin-left: 9%;
         }
+}
 
         @media screen and (max-width: 893px) {
             .intro-content {
@@ -39,10 +44,6 @@
         margin-left: 10%;
     }
 
-    #radio-elements label {
-        margin-left: 10%;
-        margin-top: 3%;
-    }
 }
 
 @media screen and (max-width: 840px) {
@@ -54,10 +55,6 @@
         margin-left: 8%;
     }
 
-            #radio-elements label {
-                margin-left: 8%;
-                margin-top: 3%;
-            }
 
             .summary-content {
                 margin: 0 10% !important;
@@ -77,17 +74,15 @@
         margin-left: 6%;
     }
 
-            #radio-elements label {
-                margin-left: 6%;
-                /* margin-top: 3%; */
-            }
-
+        h2.pageheading{
+        margin:0 4%;
+    }
             .fa-check-incorrect {
                 bottom: 10px;
             }
 
             .radio-fa-check {
-                bottom: 6px;
+                /*bottom: 6px;*/
             }
 
             .question-band {
@@ -122,11 +117,6 @@
     #radio-elements label + label {
         margin-left: 6%;
     }
-
-        #radio-elements label {
-            margin-left: 6%;
-            margin-top: 3%;
-        }
 
         h2.pageheading {
             margin: 0 2%;
@@ -182,11 +172,6 @@
             right: 116px;
         }
 
-        .radio-fa-check {
-            bottom: 2px;
-            right: 9px;
-        }
-
         .question-band {
             margin-left: 17%;
         }
@@ -199,14 +184,8 @@
         }
 
         #radio-elements label + label {
-            margin-left: 6%;
+        margin-left: 5%;
         }
-
-        #radio-elements label {
-            margin-left: 6%;
-            margin-top: 3%;
-        }
-
         #radio-elements img {
             width: 85%;
         }       
@@ -240,9 +219,8 @@
         margin-left: 5%;
     }
 
-    #radio-elements label {
-        margin-left: 5%;
-        margin-top: 3%;
+    .question-band{
+        margin-left: 21%;
     }
 }
 /* Smartphones (portrait and landscape) ----------- */
@@ -250,19 +228,16 @@
 }
 
     @media screen and (max-width : 420px) {
-      
+    #footer-navigation .previous, #footer-navigation .next {
+        /*margin-top: 2%;
+        padding: 0% 2% 3% 0%;
+        display: inline-table;*/
+    }
 
         #radio-elements label + label {
-            margin-left: 5%;
+        margin-left: 2%;
         }
-
-        #radio-elements label {
-            margin-left: 5%;
-            margin-top: 3%;
-        }
-
         #footer-div {
             margin-left: 2%;
-        }
     }
 }

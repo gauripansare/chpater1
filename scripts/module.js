@@ -1,4 +1,20 @@
-﻿jQuery.fn.extend({
+﻿var userAgentCustom = window.navigator.userAgent;
+var ua = navigator.userAgent.toLowerCase();
+var isAndroid = ua.indexOf("android") > -1;
+var isIE11version = !!navigator.userAgent.match(/Trident.*rv\:11\./);
+var isIOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+var isChrome = /Chrome/.test(navigator.userAgent) && /Google Inc/.test(navigator.vendor);
+var CurClientWidth = window.innerWidth;
+var Macbrowser = navigator.userAgent.indexOf('Chrome');
+var Macos = navigator.userAgent.indexOf('Mac');
+var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+var isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+var isIpad = userAgentCustom.match(/iPad/i)
+var isIphone = (navigator.userAgent.match(/iPhone/i))
+var isIEEdge = /Edge/.test(navigator.userAgent)
+var isFirefox = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)
+
+jQuery.fn.extend({
     k_enable: function () {
         return this.removeClass('disabled').attr("aria-disabled", "false").removeAttr("disabled");
     },
@@ -29,20 +45,19 @@ var _ModuleCommon = (function () {
             }
 
         },
-        RemoveReviewData:function(){
+        RemoveReviewData: function () {
             var currentPageData = _Navigator.GetCurrentPage();
             index = -1;
             if (reviewData != undefined && reviewData.length > 0) {
                 for (var i = 0; i < reviewData.length; i++) {
                     if (reviewData[i].pageId == currentPageData.pageId) {
-                        index =i;
+                        index = i;
                         break;
                     }
                 }
             }
-            if(i > -1)
-            {
-                reviewData.splice(i,1);
+            if (i > -1) {
+                reviewData.splice(i, 1);
             }
 
         },
@@ -145,6 +160,12 @@ var _ModuleCommon = (function () {
                 }
             }
             this.SetAccessibility();
+            if (isFirefox) {
+                this.SetCustomarialabelforRadio();
+            }
+            if (isIE11version) {
+                //this.IECustomCheckboxAccessbility();
+            }
         },
         DisplayChecklistCorrectIncorrect: function () {
             var chkboxarray = $("input[type='checkbox']:checked").map(function () {
@@ -181,16 +202,24 @@ var _ModuleCommon = (function () {
 
             this.Applycss();
             this.SetAccessibility();
+            if (isFirefox) {
+                this.SetCustomarialabelforRadio();
+            }
+            if (isIE11version) {
+                //this.IECustomCheckboxAccessbility();
+            }
         },
         SetAccessibility: function () {
             var radio = $("input[type='radio']:checked").attr("id")
             var rarialabel = "";
             if ($("#" + radio).hasClass("correct")) {
-                rarialabel = "Correct option";
+                rarialabel = "Correct option " + $("#" + radio).next("label").text();
+                $("#" + radio).next("label").attr("aria-hidden", "true");
             }
             else {
                 $("input[type='radio'].correct").attr("aria-label", "Correct option");
-                rarialabel = "Incorrect option selected";
+                rarialabel = "Incorrect option selected " + $("#" + radio).next("label").text();
+                $("#" + radio).next("label").attr("aria-hidden", "true");
             }
             $("#" + radio).attr("aria-label", rarialabel);
             var chkboxarray = $("input[type='checkbox']").map(function () {
@@ -200,10 +229,13 @@ var _ModuleCommon = (function () {
             for (var i = 0; i < chkboxarray.length; i++) {
                 carialabel = "";
                 if ($("#" + chkboxarray[i]).hasClass("correct")) {
-                    carialabel = "Correct option";
+                    $("#" + chkboxarray[i]).attr("cheked", "true");
+                    carialabel = "Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
-                else if($("#" + chkboxarray[i]).hasClass("incorrect")){
-                    carialabel = "Incorrect option selected";
+                else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
+                    carialabel = "Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
                 $("#" + chkboxarray[i]).attr("aria-label", carialabel);
             }
@@ -225,26 +257,30 @@ var _ModuleCommon = (function () {
             if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
                 this.DisplayUserReviewMode();
             }
-            else
-            {
+            else {
                 this.RemoveReviewData();
             }
             if (_Navigator.IsPresenterMode() == true) {
-                LoadPresenterMod();
+                this.LoadPresenterMod();
             }
 
         },
         LoadPresenterMod: function () {
+            debugger;
             $("#linknext").k_enable();
-            $("#" + pageDetailData.radio).before(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
-            $("#" + pageDetailData.radio).addClass("correct");
-            $("input[type='radio']").k_disable();
-            for (var i = 0; i < pageDetailData.checkbox.length; i++) {
-                $("#" + pageDetailData.checkbox[i]).after(' <i class="fa radio-fa-check fa-check" style="font-size:20px;color:#01662C;"></i>');
-                $("#" + pageDetailData.checkbox[i]).addClass("correct");
-                $("#" + pageDetailData.checkbox[i]).closest("label").css("font-weight", "bold");
-                $("input[type='checkbox']").k_disable();
-                $("input[type='checkbox']").closest("label").find(".checkmark").removeClass("checkmark");
+            var pageDetailData = this.GetPageDetailData();
+            if (pageDetailData != undefined) {
+                $("#" + pageDetailData.radio).next("label").find("span").after(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
+                $("#" + pageDetailData.radio).addClass("correct");
+                $("input[type='radio']").k_disable();
+                for (var i = 0; i < pageDetailData.checkbox.length; i++) {
+                    $("#" + pageDetailData.checkbox[i]).next("label").find("span").after(' <i class="fa radio-fa-check fa-check" style="font-size:20px;color:#01662C;"></i>');
+                    $("#" + pageDetailData.checkbox[i]).addClass("correct");
+                    $("#" + pageDetailData.checkbox[i]).next("label").css("font-weight", "bold");
+                    $("input[type='checkbox']").k_disable();
+                    $("input[type='checkbox']").next("label").find(".checkmark").removeClass("checkmark");
+                    $("input[type='checkbox']").css({"position":"absolute", "opacity": "0"});
+                }
             }
         },
         Applycss: function () {
@@ -271,19 +307,17 @@ var _ModuleCommon = (function () {
             else if ($("input[type='radio']:checked").attr("id") == "radio2") {
                 $("input[type='checkbox']").k_enable();
                 $(".checkbox-item").k_enable();
-                if(pageData.checkbox.length == 0 && $("input[type='checkbox']:checked").length >0 )
-                {
+                if (pageData.checkbox.length == 0 && $("input[type='checkbox']:checked").length > 0) {
                     $("#submitbtn").k_enable();
                 }
                 else if ($("input[type='checkbox']:checked").length > 0 && $("input[type='checkbox']:checked").length == pageData.checkbox.length) {
                     $("#submitbtn").k_enable();
                 }
-                else
-                {
+                else {
                     $("#submitbtn").k_disable();
                 }
             }
-           
+
         },
         CalculateScore: function () {
             var pageData = this.GetPageDetailData();
@@ -308,7 +342,7 @@ var _ModuleCommon = (function () {
             $("input").k_disable();
             var currPid = _Navigator.GetCurrentPage().pageId;
             _Navigator.IncrementCounter();
-            var pageData = this.GetPageDetailData();            
+            var pageData = this.GetPageDetailData();
             var fdbkUrl = "";
             if (_Navigator.GetCurrentPage().hasOnlyRadio) {
                 var isRadioCorrect = this.GetRadioStatus();
@@ -324,15 +358,13 @@ var _ModuleCommon = (function () {
                     this.EnableNext();
                 }
                 else {
-                    if((_Navigator.GetCounter() == 1))
-                    {
-                         fdbkUrl = _Settings.dataRoot + pageData.feedback[2];
-                         this.AddReviewData(false, fdbkUrl);
-                         this.DisplayChecklistCorrectIncorrect();
-                        
+                    if ((_Navigator.GetCounter() == 1)) {
+                        fdbkUrl = _Settings.dataRoot + pageData.feedback[2];
+                        this.AddReviewData(false, fdbkUrl);
+                        this.DisplayChecklistCorrectIncorrect();
+
                     }
-                    else
-                    {
+                    else {
                         fdbkUrl = _Settings.dataRoot + pageData.feedback[1];
                         this.AddReviewData(true, fdbkUrl);
                         this.DisplayCheckboxCorrectIncorrect();
@@ -357,16 +389,16 @@ var _ModuleCommon = (function () {
                 }
                 else {
 
-                    if ((_Navigator.GetCounter()== 1 && isRadioCorrect && !isAllCheckCorrect ) || 
-                    (_Navigator.GetCounter() == 1 && !isRadioCorrect != true && isAllCheckCorrect) || 
-                    (_Navigator.GetCounter() == 1 && !isRadioCorrect  && !isAllCheckCorrect )) {
+                    if ((_Navigator.GetCounter() == 1 && isRadioCorrect && !isAllCheckCorrect) ||
+                        (_Navigator.GetCounter() == 1 && !isRadioCorrect != true && isAllCheckCorrect) ||
+                        (_Navigator.GetCounter() == 1 && !isRadioCorrect && !isAllCheckCorrect)) {
 
                         fdbkUrl = _Settings.dataRoot + pageData.feedback[1];
                         this.AddReviewData(false, fdbkUrl);
                         this.DisplayChecklistCorrectIncorrect();
                     }
-                    else if (_Navigator.GetCounter() == 2 && !isRadioCorrect && !isAllCheckCorrect || 
-                    (_Navigator.GetCounter() == 2 && !isRadioCorrect && isAllCheckCorrect)) {
+                    else if (_Navigator.GetCounter() == 2 && !isRadioCorrect && !isAllCheckCorrect ||
+                        (_Navigator.GetCounter() == 2 && !isRadioCorrect && isAllCheckCorrect)) {
                         fdbkUrl = _Settings.dataRoot + pageData.feedback[2];
                         this.AddReviewData(false, fdbkUrl);
                         this.DisplayCheckboxCorrectIncorrect();
@@ -446,16 +478,21 @@ var _ModuleCommon = (function () {
             $('input[type="checkbox"].incorrect').next("label").css({ "font-weight": "normal" })
             $("input[type='checkbox']:not(.correct)").k_enable();
             $("input[type='checkbox']:not(.correct)").removeAttr("checked");
+            $("input[type='checkbox']:not(.correct)").removeAttr("aria-label")
             $("input[type='checkbox']:not(.correct)").next("label").find("span").addClass("checkmark")
             $("input[type='checkbox']:not(.correct)").next("label").find("i").remove();
+            $('input[type="checkbox"]:not(.correct)').removeAttr("aria-hidden");
+            $(".ffreading").remove();
+            $('input[type="checkbox"]').removeAttr("aira-hidden");
 
             if (!$('input[type="radio"]:checked').hasClass("correct")) {
                 $('input[type="radio"]:checked').next("label").find("span").removeClass("without-before")
                 $('input[type="radio"]:checked').next("label").find("i").remove();
                 $("input[type='radio']").k_enable();
-                $("input[type='radio']").removeAttr("checked");
+                $("input[type='radio']").removeAttr("checked").removeAttr("aria-label");
             }
             $("input[type='radio']").removeClass("incorrect");
+            $("input[type='radio']").removeAttr("aria-hidden");
             $("#div_feedback .div_fdkcontent").html("");
             $("#div_feedback").hide();
             $(".checkmark").show();
@@ -539,6 +576,79 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
+        AppendFooter: function () {
+            if ($(".presentationModeFooter").length == 0) {
+                var str = '<div class="presentationModeFooter">Presentation Mode</div>';
+                $("footer").append($(str));
+                $("footer").show();
+                $("#linknext").k_enable();
+            }
+        },
+        SetCustomarialabelforRadio: function () {
+            $("input[type='radio']").each(function () {
+                var ischecked = "\n radio button unavailable"
+                if ($(this).prop("checked") == "true" || $(this).prop("checked") == true) {
+                    ischecked = ischecked + " checked "
+                }
+                else {
+                    ischecked = ischecked + " not checked "
+                }
+                var radioalabel = "";
+                if ($(this).hasClass("correct") && $(this).prop("checked")) {
+                    radioalabel = " correct option " + $(this).next("label").text();
+                }
+                else if ($(this).hasClass("incorrect") && $(this).prop("checked")) {
+                    radioalabel = " incorrect option " + $(this).next("label").text();
+                }
+                radioalabel = radioalabel;
+                $(this).next("label").after("<label class='ffreading'>" + radioalabel + "</label>");
+                $(this).attr("aria-hidden","true");
+                //$(this).closest("div").find("*").attr("aria-hidden", "true")
+
+            });
+
+            var chkboxarray = $("input[type='checkbox']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            var carialabel = "";
+            for (var i = 0; i < chkboxarray.length; i++) {
+                carialabel = "";
+                if ($("#" + chkboxarray[i]).hasClass("correct")) {
+                    $("#" + chkboxarray[i]).attr("checked", "true");
+                    carialabel = " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                }
+                else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
+                    carialabel = " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                }
+                $("#" + chkboxarray[i]).next("label").after("<label class='ffreading'>" + carialabel + "</label>")
+                $("#" + chkboxarray[i]).attr("aria-hidden","true");
+            }
+            //$("#ffread").text(carialabel).css({"opacity":"0","font-size":"0"});
+        },
+        /*IECustomCheckboxAccessbility: function(){
+            var chkboxarray = $("input[type='checkbox']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            var labeltext = "";
+            for (var i = 0; i < chkboxarray.length; i++) {
+                labeltext = "";
+                if ($("#" + chkboxarray[i]).hasClass("correct")) {
+                    $("#" + chkboxarray[i]).attr("checked", "true");
+                    labeltext = " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    $("#" + chkboxarray[i]).attr("aria-hidden","true");
+                }
+                else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
+                    labeltext = " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    $("#" + chkboxarray[i]).attr("aria-hidden","true");
+                }
+                $("#" + chkboxarray[i]).next("label").after("<label class='ffreading'>" + labeltext + "</label>")
+                
+            }
+        },*/
     }
 })();
 $(document).ready(function () {

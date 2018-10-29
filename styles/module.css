@@ -86,22 +86,38 @@
     }
 /*Question Css*/
 
+.greenspan {
+    color: #01662C;
+    font-weight: bold;
+}
+
+.redspan {
+    color: #B22222;
+    font-weight: bold;
+}
+
+.pageheading{
+    margin: 0 10%;
+}
 .wrapperimage {
     width: 798px;
     height: auto;
     position: relative;
+    display:flexbox;
+    justify-content:center;
+    overflow: hidden
 }
 
 .activityimg {
     width: 796px;
-    border: 1px solid #868686;
+    border:1px solid #cccccc;
 }
 
 .activityContainer {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 35px 0 0px 0;
+    padding: 35px 0 10px 0;
     background: #F0F0F0;
     float: left;
     width: 100%;
@@ -266,37 +282,35 @@
 #radio-elements label {
     display: inline-block;
 }
-
-#radio-elements {
-    font-size: 15px;
+#radio-elements  {
     margin-left: 3%;
 }
 
-    #radio-elements span {
-        position: relative;
-        padding-left: 6px;
-        cursor: pointer;
-        color: gray;
-        left: -25px;
-    }
+#radio-elements label span {
+    position: relative;
+    padding-left: 6px;
+    cursor: pointer;
+    color: gray;
+    left: -25px;
+}
 
-        #radio-elements span:after {
-            content: '';
-            width: 23px;
-            height: 23px;
-            border: 2px solid;
-            position: absolute;
-            left: 0px;
-            margin-top: 0%;
-            border-radius: 100%;
-            -ms-border-radius: 100%;
-            -moz-border-radius: 100%;
-            -webkit-border-radius: 100%;
-            box-sizing: border-box;
-            -ms-box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-        }
+#radio-elements label span:after {
+    content: '';
+    width: 23px;
+    height: 23px;
+    border: 2px solid;
+    position: absolute;
+    left: 0px;
+    margin-top: 0%;
+    border-radius: 100%;
+    -ms-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
 
     #radio-elements input[type="radio"]:checked + label span {
         color: #047a9c;
@@ -316,6 +330,12 @@
             -webkit-border-radius: 100%;
         }
 /*Radiobutton.css*/
+.checkbox-group fieldset, .radio-group fieldset, .checkbox-group fieldset legend, .radio-group fieldset legend {
+    width: 100%;
+}
+.checkbox-group fieldset, .radio-group fieldset {
+    margin-left: 2%;
+}
 
 /* On mouse-over, add a grey background color */
 .checkbox-item:hover input + .checkbox-item .checkmark {
@@ -360,10 +380,12 @@
 #radio-elements {
     padding-top: 3%;
 }
-
+#checkbox-elements {
+    padding-top: 3%;
+}
 #checkbox-elements {
     background: #fff;
-    margin-left: 4.5%;
+    margin-left: 2.9%;    
     margin-right: 2%;
     border-radius: 5px;
     /*padding: 2%;*/
@@ -383,10 +405,9 @@
 }
 
 #radio-elements label {
-    margin-left: 1px;
+    margin-left: 4%;
     display: block;
     position: relative;
-    padding-left: 35px;
     margin-bottom: 12px;
     cursor: pointer;
     font-size: 16px;
@@ -637,7 +658,8 @@
     left: -22px;
 }
 
-    .questioninnerwrapper .inputcircle:after, #Summary .inputcircle:after {
+/*assessment css */
+.inputcircle:after {
         content: '';
         width: 23px;
         height: 23px;
@@ -645,6 +667,7 @@
         position: absolute;
         left: 0px;
         margin-top: 0%;
+        color: #047a9c;
         border-radius: 100%;
         -ms-border-radius: 100%;
         -moz-border-radius: 100%;
@@ -703,14 +726,14 @@
 .summaryquestion {
     margin-bottom: 20px;
     float: left;
-    margin-left: -40px;
+    
 }
 
 .summaryoptions {
     min-height: 75px;
     height: auto;
     margin-bottom: 10px;
-    width: 100%;
+    width: 100%
 }
 
 .question-container {
@@ -767,13 +790,18 @@
 .quetiontext {
     margin-left: 20px;
 }
-/* Text area Feedback css */
-#div_feedback_textarea{
-    display: none;
-    height: auto;
-    /* background: #F0F0F0; */
+
+/*Presenter Mode css start*/
+.presentationModeFooter {
+    display: inline-block;
+    background-color: #1a76cb;
+    height: 29px;
     width: 100%;
+        color: white;
+    text-align: center;
 }
+/*presenter Mode css End*/
+
 @-moz-document url-prefix() {
     #radio-elements input[type="radio"]:checked + span:before {
         left: -13px !important;
@@ -793,4 +821,9 @@
 sup { 
     vertical-align: super;
     font-size: smaller;
+}
+.ffreading{
+    position: absolute !important;
+    opacity: 0;
+    font-size: 0px !important;
 }
