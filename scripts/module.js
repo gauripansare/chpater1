@@ -13,7 +13,11 @@ var isIpad = userAgentCustom.match(/iPad/i)
 var isIphone = (navigator.userAgent.match(/iPhone/i))
 var isIEEdge = /Edge/.test(navigator.userAgent)
 var isFirefox = /Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent)
+var animTime = 1000;
 
+if (isIphone != null) {
+    animTime = 3000;
+}
 jQuery.fn.extend({
     k_enable: function () {
         return this.removeClass('disabled').attr("aria-disabled", "false").removeAttr("disabled");
@@ -244,7 +248,7 @@ var _ModuleCommon = (function () {
         OnPageLoad: function () {
             debugger;
             var pageDetailData = this.GetPageDetailData();
-            //this.ApplycontainerWidth();
+            this.ApplycontainerWidth();
             $("#div_feedback").hide();
             $('#hintdiv').hide();
             $("#textareasubmitbtn").k_disable();
@@ -436,7 +440,7 @@ var _ModuleCommon = (function () {
                 }
             }
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
-                $('html,body').animate({ scrollTop: document.body.scrollHeight }, 1000, function () { });
+                $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () { });
             });
             $("#div_feedback").show();
             $("input").k_disable();
@@ -517,6 +521,7 @@ var _ModuleCommon = (function () {
             $('input[type="radio"]:not(.correct)').next("label").removeAttr("aria-hidden");
             $("input[type='radio']:not(.correct)").removeAttr("aria-hidden");
             $("input[type='radio'].incorrect").next("label").find("i").remove();
+            $("input[type='radio']").removeClass("incorrect");
             //$("input[type='radio']").next("label").removeAttr("aria-hidden");
             $("#div_feedback .div_fdkcontent").html("");
             $("#div_feedback").hide();
@@ -630,7 +635,7 @@ var _ModuleCommon = (function () {
                 else if ($(this).hasClass("incorrect") && $(this).prop("checked")) {
                     radioalabel = ischecked + " incorrect option selected " + $(this).next("label").text();
                 }
-                else{
+                else {
                     radioalabel = ischecked + $(this).next("label").text();
                 }
                 radioalabel = radioalabel;

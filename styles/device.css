@@ -135,8 +135,6 @@
 
     .radio-fa-check-incorrect {
         position: relative;
-        bottom: 5px;
-        right: 9px;
         float: left;
         width: 0px;
         background-color: #fff;
@@ -218,7 +216,7 @@
     #radio-elements label + label {
         margin-left: 2%;
     }
-    
+
     #footer-div {
         margin-left: 2%;
     }
