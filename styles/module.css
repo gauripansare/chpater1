@@ -40,17 +40,15 @@
 
 /*intro-content CSS End */
 
-
-
 /*Question Css*/
 .questionband {
     float: left;
 }
 
-    .questionband input[type='text'], .questionband input[type='number'] {
-        text-align: center;
-        width: 100px;
-    }
+.questionband input[type='text'], .questionband input[type='number'] {
+    text-align: center;
+    width: 100px;
+}
 
 .previous, .next {
     padding-bottom: 15px;
@@ -62,13 +60,13 @@
     margin-top: 10px;
 }
 
-    .question_icon span {
-        border-radius: 30px;
-        background: #007AA2;
-        color: #FFF;
-        font-size: 20px;
-        padding: 12px 22px 15px 22px;
-    }
+.question_icon span {
+    border-radius: 30px;
+    background: #007AA2;
+    color: #FFF;
+    font-size: 20px;
+    padding: 12px 22px 15px 22px;
+}
 
 .question_txt {
     margin-left: 60px;
@@ -80,10 +78,10 @@
     font-weight: bold;
 }
 
-    .optionselected span {
-        background-color: #003058;
-        color: #F9FF00;
-    }
+.optionselected span {
+    background-color: #003058;
+    color: #F9FF00;
+}
 /*Question Css*/
 
 .greenspan {
@@ -193,16 +191,7 @@
 
 /* SG */
 .group-wrapper {
-    /*background:lightgray;*/
     width: 100%;
-}
-
-.text-content {
-    /*margin: 0 5%;*/
-}
-
-.radio-group, .checkbox-group {
-    /*margin: 0 8%;*/
 }
 
 .checkbox-group {
@@ -219,12 +208,10 @@
 }
 
 .submitbtn {
-    /*margin: 0 8%;*/
     padding-bottom: 1px;
 }
 
 .radio-group {
-    /*padding-top: 1.5%;*/
     background: #fff;
     margin-left: 2%;
     margin-right: 2%;
@@ -255,12 +242,12 @@
     user-select: none;
 }
 
-    /* Hide the browser's default checkbox */
-    #checkbox-elements input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-    }
+/* Hide the browser's default checkbox */
+#checkbox-elements input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
 
 /* Create a custom checkbox */
 .checkmark {
@@ -312,23 +299,25 @@
     -webkit-box-sizing: border-box;
 }
 
-    #radio-elements input[type="radio"]:checked + label span {
-        color: #047a9c;
-    }
+#radio-elements input[type="radio"]:checked + label span {
+    color: #047a9c;
+}
 
-        #radio-elements input[type="radio"]:checked + label span:before {
-            content: '';
-            width: 15px;
-            height: 15px;
-            position: absolute;
-            background: #047a9c;
-            left: 4px;
-            margin-top: 4px;
-            border-radius: 100%;
-            -ms-border-radius: 100%;
-            -moz-border-radius: 100%;
-            -webkit-border-radius: 100%;
-        }
+#radio-elements input[type="radio"]:checked + label span:before {
+    content: '';
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    background: #047a9c;
+    left: 4px;
+    margin-top: 4px;
+    border-radius: 100%;
+    -ms-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+}
+
+
 /*Radiobutton.css*/
 .checkbox-group fieldset, .radio-group fieldset, .checkbox-group fieldset legend, .radio-group fieldset legend {
     width: 100%;
@@ -506,10 +495,10 @@
     float: left;
 }
 
-    .questionband input[type='text'], .questionband input[type='number'] {
-        text-align: center;
-        width: 100px;
-    }
+.questionband input[type='text'], .questionband input[type='number'] {
+    text-align: center;
+    width: 100px;
+}
 
 .previous, .next {
     padding-bottom: 15px;
@@ -521,13 +510,13 @@
     margin-top: 10px;
 }
 
-    .question_icon span {
-        border-radius: 30px;
-        background: #007AA2;
-        color: #FFF;
-        font-size: 20px;
-        padding: 12px 22px 15px 22px;
-    }
+.question_icon span {
+    border-radius: 30px;
+    background: #007AA2;
+    color: #FFF;
+    font-size: 20px;
+    padding: 12px 22px 15px 22px;
+}
 
 .question_txt {
     margin-left: 60px;
@@ -554,14 +543,14 @@
     margin-left: 15px;
 }
 
-    .search-bar input {
-        height: 40px;
-        width: 100%;
-        background: #EBEBEB;
-        border: none;
-        border-radius: 5px;
-        padding-left: 10px;
-    }
+.search-bar input {
+    height: 40px;
+    width: 100%;
+    background: #EBEBEB;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
 
 .filter-bar {
     width: 27%;
@@ -569,14 +558,14 @@
     margin-left: 40px;
 }
 
-    .filter-bar input {
-        height: 40px;
-        width: 98%;
-        background: #EBEBEB;
-        border: none;
-        border-radius: 5px;
-        padding-left: 10px;
-    }
+.filter-bar input {
+    height: 40px;
+    width: 98%;
+    background: #EBEBEB;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+}
 
 .media-group {
     float: left;
@@ -588,30 +577,30 @@
     display: flex;
 }
 
-    .media-row .media-col-1, .media-row .media-col-2, .media-row .media-col-3 {
-        width: 33.33%;
-        float: left;
-        padding: 0px 20px;
-    }
+.media-row .media-col-1, .media-row .media-col-2, .media-row .media-col-3 {
+    width: 33.33%;
+    float: left;
+    padding: 0px 20px;
+}
 
-        .media-row .media-col-1 img, .media-row .media-col-2 img, .media-row .media-col-3 img {
-            width: 100%;
-        }
+.media-row .media-col-1 img, .media-row .media-col-2 img, .media-row .media-col-3 img {
+    width: 100%;
+}
 
 .media-text {
     display: flex;
 }
 
-    .media-text p {
-        float: left;
-    }
+.media-text p {
+    float: left;
+}
 
-    .media-text i {
-        float: right;
-        font-size: 20px;
-        color: #0E82A8;
-        margin-left: 25px;
-    }
+.media-text i {
+    float: right;
+    font-size: 20px;
+    color: #0E82A8;
+    margin-left: 25px;
+}
 
 #header-title input {
     float: right;
@@ -660,22 +649,22 @@
 
 /*assessment css */
 .inputcircle:after {
-        content: '';
-        width: 23px;
-        height: 23px;
-        border: 2px solid;
-        position: absolute;
-        left: 0px;
-        margin-top: 0%;
-        border-radius: 100%;
-        -ms-border-radius: 100%;
-        -moz-border-radius: 100%;
-        -webkit-border-radius: 100%;
-        box-sizing: border-box;
-        -ms-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-    }
+    content: '';
+    width: 23px;
+    height: 23px;
+    border: 2px solid;
+    position: absolute;
+    left: 0px;
+    margin-top: 0%;
+    border-radius: 100%;
+    -ms-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -webkit-border-radius: 100%;
+    box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
 
 .assessmentradio:checked + .inputcircle:before {
     content: '';
@@ -805,22 +794,17 @@
     #radio-elements input[type="radio"]:checked + span:before {
         left: -13px !important;
     }
-
-    .radio-fa-check {
-        /*bottom: 7px !important;*/
-    }
-
-    .radio-fa-check-incorrect {
-        /*right: 13px !important;*/
-    }
 }
+
 .font12, .font12 *{
     font-size: 12px !important;
 }
+
 sup { 
     vertical-align: super;
     font-size: smaller;
 }
+
 .Accessibility{
     position: absolute !important;
     opacity: 0;
