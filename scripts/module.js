@@ -61,6 +61,12 @@ var _ModuleCommon = (function () {
             }
 
         },
+        GetReviewData: function () {
+            return reviewData;
+        },
+        SetReviewData: function (rData) {
+            reviewData = rData;
+        },
         GetPageDetailData: function () {
             var currentPageData = _Navigator.GetCurrentPage();
             var pageData = _PData[currentPageData.pageId];
@@ -160,11 +166,8 @@ var _ModuleCommon = (function () {
                 }
             }
             this.SetAccessibility();
-            if (isFirefox) {
+            if (isFirefox || isIE11version) {
                 this.SetCustomarialabelforRadio();
-            }
-            if (isIE11version) {
-                //this.IECustomCheckboxAccessbility();
             }
         },
         DisplayChecklistCorrectIncorrect: function () {
@@ -202,11 +205,8 @@ var _ModuleCommon = (function () {
 
             this.Applycss();
             this.SetAccessibility();
-            if (isFirefox) {
+            if (isFirefox || isIE11version) {
                 this.SetCustomarialabelforRadio();
-            }
-            if (isIE11version) {
-                //this.IECustomCheckboxAccessbility();
             }
         },
         SetAccessibility: function () {
@@ -260,9 +260,12 @@ var _ModuleCommon = (function () {
             else {
                 this.RemoveReviewData();
             }
-            if (_Navigator.IsPresenterMode() == true) {
-                this.LoadPresenterMod();
+            if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) {
+                $('#footer-navigation').css('display', 'table');
             }
+            /*if (_Navigator.IsPresenterMode()) {
+                this.LoadPresenterMod();
+            }*/
 
         },
         LoadPresenterMod: function () {
@@ -271,17 +274,29 @@ var _ModuleCommon = (function () {
             var pageDetailData = this.GetPageDetailData();
             if (pageDetailData != undefined) {
                 $("#" + pageDetailData.radio).next("label").find("span").after(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
+                $("#" + pageDetailData.radio).attr("checked", "true");
                 $("#" + pageDetailData.radio).addClass("correct");
+                $("#" + pageDetailData.radio).next("label").find("span").addClass("without-before");
                 $("input[type='radio']").k_disable();
                 for (var i = 0; i < pageDetailData.checkbox.length; i++) {
                     $("#" + pageDetailData.checkbox[i]).next("label").find("span").after(' <i class="fa radio-fa-check fa-check" style="font-size:20px;color:#01662C;"></i>');
                     $("#" + pageDetailData.checkbox[i]).addClass("correct");
+                    $("#" + pageDetailData.checkbox[i]).attr("checked", "true");
                     $("#" + pageDetailData.checkbox[i]).next("label").css("font-weight", "bold");
                     $("input[type='checkbox']").k_disable();
                     $("input[type='checkbox']").next("label").find(".checkmark").removeClass("checkmark");
-                    $("input[type='checkbox']").css({"position":"absolute", "opacity": "0"});
+                    $("input[type='checkbox']").next("label").find("span").hide();
+                    $("input[type='checkbox']").css({ "position": "absolute", "opacity": "0" });
                 }
             }
+            this.SetAccessibility();
+            if (isFirefox || isIE11version) {
+                this.SetCustomarialabelforRadio();
+            }
+            if (isIE11version) {
+                //this.IECustomCheckboxAccessbility();
+            }
+
         },
         Applycss: function () {
 
@@ -356,13 +371,13 @@ var _ModuleCommon = (function () {
                     _Navigator.SetPageScore(this.CalculateScore())
                     _Navigator.SetPageStatus(true);
                     this.EnableNext();
+                    _Navigator.GetBookmarkData();
                 }
                 else {
                     if ((_Navigator.GetCounter() == 1)) {
                         fdbkUrl = _Settings.dataRoot + pageData.feedback[2];
                         this.AddReviewData(false, fdbkUrl);
                         this.DisplayChecklistCorrectIncorrect();
-
                     }
                     else {
                         fdbkUrl = _Settings.dataRoot + pageData.feedback[1];
@@ -371,6 +386,7 @@ var _ModuleCommon = (function () {
                         _Navigator.SetPageScore(this.CalculateScore())
                         _Navigator.SetPageStatus(true);
                         this.EnableNext();
+                        _Navigator.GetBookmarkData();
                     }
                 }
             }
@@ -386,6 +402,7 @@ var _ModuleCommon = (function () {
                     _Navigator.SetPageScore(this.CalculateScore())
                     _Navigator.SetPageStatus(true);
                     this.EnableNext();
+                    _Navigator.GetBookmarkData();
                 }
                 else {
 
@@ -405,6 +422,7 @@ var _ModuleCommon = (function () {
                         _Navigator.SetPageScore(this.CalculateScore())
                         _Navigator.SetPageStatus(true);
                         this.EnableNext();
+                        _Navigator.GetBookmarkData();
                     }
                     else if ((_Navigator.GetCounter() == 2 && isRadioCorrect && !isAllCheckCorrect)) {
                         fdbkUrl = _Settings.dataRoot + pageData.feedback[3];
@@ -413,6 +431,7 @@ var _ModuleCommon = (function () {
                         _Navigator.SetPageScore(this.CalculateScore())
                         _Navigator.SetPageStatus(true);
                         this.EnableNext();
+                        _Navigator.GetBookmarkData();
                     }
                 }
             }
@@ -481,18 +500,24 @@ var _ModuleCommon = (function () {
             $("input[type='checkbox']:not(.correct)").removeAttr("aria-label")
             $("input[type='checkbox']:not(.correct)").next("label").find("span").addClass("checkmark")
             $("input[type='checkbox']:not(.correct)").next("label").find("i").remove();
+            $("input[type='checkbox']:not(.correct)").next("label").removeAttr("aria-hidden");
             $('input[type="checkbox"]:not(.correct)').removeAttr("aria-hidden");
-            $(".ffreading").remove();
-            $('input[type="checkbox"]').removeAttr("aira-hidden");
+            $('input[type="checkbox"]:not(.correct)').next("label").next(".Accessibility").remove();
+            //$(".Accessibility").remove();
+            $('input[type="checkbox"]:not(.correct)').removeAttr("aira-hidden");
 
             if (!$('input[type="radio"]:checked').hasClass("correct")) {
                 $('input[type="radio"]:checked').next("label").find("span").removeClass("without-before")
-                $('input[type="radio"]:checked').next("label").find("i").remove();
-                $("input[type='radio']").k_enable();
-                $("input[type='radio']").removeAttr("checked").removeAttr("aria-label");
+                //$('input[type="radio"]:checked').removeAttr("aria-hidden");
+                //$('input[type="radio"]:checked').next("label").find("i").remove();
+                $("input[type='radio']:not(.correct)").removeAttr("checked").removeAttr("aria-label");
             }
-            $("input[type='radio']").removeClass("incorrect");
-            $("input[type='radio']").removeAttr("aria-hidden");
+            $("input[type='radio']:not(.correct)").next("label").next(".Accessibility").remove();
+            $("input[type='radio']:not(.correct)").k_enable();
+            $('input[type="radio"]:not(.correct)').next("label").removeAttr("aria-hidden");
+            $("input[type='radio']:not(.correct)").removeAttr("aria-hidden");
+            $("input[type='radio'].incorrect").next("label").find("i").remove();
+            //$("input[type='radio']").next("label").removeAttr("aria-hidden");
             $("#div_feedback .div_fdkcontent").html("");
             $("#div_feedback").hide();
             $(".checkmark").show();
@@ -583,8 +608,13 @@ var _ModuleCommon = (function () {
                 $("footer").show();
                 $("#linknext").k_enable();
             }
+            else {
+                $("footer").show();
+                $("#linknext").k_enable();
+            }
         },
         SetCustomarialabelforRadio: function () {
+            $(".Accessibility").remove();
             $("input[type='radio']").each(function () {
                 var ischecked = "\n radio button unavailable"
                 if ($(this).prop("checked") == "true" || $(this).prop("checked") == true) {
@@ -595,14 +625,18 @@ var _ModuleCommon = (function () {
                 }
                 var radioalabel = "";
                 if ($(this).hasClass("correct") && $(this).prop("checked")) {
-                    radioalabel = " correct option " + $(this).next("label").text();
+                    radioalabel = ischecked + " correct option selected" + $(this).next("label").text();
                 }
                 else if ($(this).hasClass("incorrect") && $(this).prop("checked")) {
-                    radioalabel = " incorrect option " + $(this).next("label").text();
+                    radioalabel = ischecked + " incorrect option selected " + $(this).next("label").text();
+                }
+                else{
+                    radioalabel = ischecked + $(this).next("label").text();
                 }
                 radioalabel = radioalabel;
-                $(this).next("label").after("<label class='ffreading'>" + radioalabel + "</label>");
-                $(this).attr("aria-hidden","true");
+                $(this).next("label").after("<label class='Accessibility'>" + radioalabel + "</label>");
+                $(this).attr("aria-hidden", "true");
+                $(this).next("label").attr("aria-hidden", "true");
                 //$(this).closest("div").find("*").attr("aria-hidden", "true")
 
             });
@@ -612,48 +646,37 @@ var _ModuleCommon = (function () {
             }).get();
             var carialabel = "";
             for (var i = 0; i < chkboxarray.length; i++) {
+                var ischecked = "\n checkbox unavailable"
                 carialabel = "";
+                if ($("#" + chkboxarray[i]).prop("checked") == "true" || $("#" + chkboxarray[i]).prop("checked") == true) {
+                    ischecked = ischecked + " checked "
+                }
+                else {
+                    ischecked = ischecked + " not checked "
+                }
                 if ($("#" + chkboxarray[i]).hasClass("correct")) {
                     $("#" + chkboxarray[i]).attr("checked", "true");
-                    carialabel = " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    carialabel = ischecked + " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
                     $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
                 else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
-                    carialabel = " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
+                    carialabel = ischecked + " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
                     $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                 }
-                $("#" + chkboxarray[i]).next("label").after("<label class='ffreading'>" + carialabel + "</label>")
-                $("#" + chkboxarray[i]).attr("aria-hidden","true");
+                else {
+                    carialabel = ischecked + $("#" + chkboxarray[i]).next("label").text();
+                }
+                $("#" + chkboxarray[i]).next("label").after("<label class='Accessibility'>" + carialabel + "</label>")
+                $("#" + chkboxarray[i]).attr("aria-hidden", "true");
+                $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
             }
             //$("#ffread").text(carialabel).css({"opacity":"0","font-size":"0"});
         },
-        /*IECustomCheckboxAccessbility: function(){
-            var chkboxarray = $("input[type='checkbox']").map(function () {
-                return $(this).attr("id");
-            }).get();
-            var labeltext = "";
-            for (var i = 0; i < chkboxarray.length; i++) {
-                labeltext = "";
-                if ($("#" + chkboxarray[i]).hasClass("correct")) {
-                    $("#" + chkboxarray[i]).attr("checked", "true");
-                    labeltext = " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
-                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
-                    $("#" + chkboxarray[i]).attr("aria-hidden","true");
-                }
-                else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
-                    labeltext = " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
-                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
-                    $("#" + chkboxarray[i]).attr("aria-hidden","true");
-                }
-                $("#" + chkboxarray[i]).next("label").after("<label class='ffreading'>" + labeltext + "</label>")
-                
-            }
-        },*/
     }
 })();
 $(document).ready(function () {
     debugger;
-    _Navigator.Start();
+    _Navigator.Initialize();
     //$("h1:first").focus();
 
     //if (_Settings.enableCache) {

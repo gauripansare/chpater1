@@ -124,7 +124,7 @@ $(document).on('click', ".activityimg", function (event) {
 });
 
 
-$(document).on('click', ".start-btn", function (event) {
+$(document).on('click', "#start", function (event) {
     _Navigator.Next();
 });
 $(document).on('click', "#submitbtn", function (event) {
@@ -139,12 +139,13 @@ $(document).on('click', "#continuebtn", function (event) {
 $(document).on('change', "input[type='checkbox'].pagecheckbox", function (event) {
     _ModuleCommon.EnableSubmit();
     if ($(this).prop("checked") == true) {
-        $(this).closest("label").css({ "font-weight": "bold" })
+        $(this).next("label").css({ "font-weight": "bold" })
     }
     else
     {
-        $(this).closest("label").css({ "font-weight": "normal" })
+        $(this).next("label").css({ "font-weight": "normal" })
     }
+
 });
 $(document).on('change', "input[type='radio'].pageradio", function (event) {
     _ModuleCommon.EnableSubmit();
@@ -204,6 +205,14 @@ $(document).on("keyup", "#textareainputhere", function (event) {
         $("#textareasubmitbtn").k_disable();
     }
 });
+
+window.onload = function () {
+    _ScormUtility.Init();
+}
+
+window.onunload = function () {
+    _ScormUtility.End();
+}
 
 
 

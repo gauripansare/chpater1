@@ -667,7 +667,6 @@
         position: absolute;
         left: 0px;
         margin-top: 0%;
-        color: #047a9c;
         border-radius: 100%;
         -ms-border-radius: 100%;
         -moz-border-radius: 100%;
@@ -693,7 +692,7 @@
 }
 
 .assessmentradio:checked + .inputcircle {
-    color: #047a9c;
+    color: #047a9c !important;
 }
 
 #questioninnerwrapper.inputcircle, #Summary.inputcircle {
@@ -822,7 +821,7 @@ sup {
     vertical-align: super;
     font-size: smaller;
 }
-.ffreading{
+.Accessibility{
     position: absolute !important;
     opacity: 0;
     font-size: 0px !important;
