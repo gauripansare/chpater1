@@ -246,7 +246,6 @@ var _ModuleCommon = (function () {
 
         },
         OnPageLoad: function () {
-            debugger;
             var pageDetailData = this.GetPageDetailData();
             this.ApplycontainerWidth();
             $("#div_feedback").hide();
@@ -273,7 +272,7 @@ var _ModuleCommon = (function () {
 
         },
         LoadPresenterMod: function () {
-            debugger;
+             
             $("#linknext").k_enable();
             var pageDetailData = this.GetPageDetailData();
             if (pageDetailData != undefined) {
@@ -310,7 +309,6 @@ var _ModuleCommon = (function () {
             }
         },
         EnableSubmit: function () {
-            debugger;
             //var currPage = _Navigator.GetCurrentPage().pageId;
             var pageData = this.GetPageDetailData();
             if ($("input[type='radio']:checked").attr("id") == "radio1") {
@@ -357,7 +355,6 @@ var _ModuleCommon = (function () {
 
         },
         OnSubmit: function () {
-            debugger;
             $("input").k_disable();
             var currPid = _Navigator.GetCurrentPage().pageId;
             _Navigator.IncrementCounter();
@@ -366,7 +363,6 @@ var _ModuleCommon = (function () {
             if (_Navigator.GetCurrentPage().hasOnlyRadio) {
                 var isRadioCorrect = this.GetRadioStatus();
                 if (isRadioCorrect) {
-                    debugger;
                     fdbkUrl = _Settings.dataRoot + pageData.feedback[0];
                     $('input[type="radio"]:checked').next("label").find("span").addClass("without-before")
                     $("#" + pageData.radio).attr("checked", "checked");
@@ -447,7 +443,6 @@ var _ModuleCommon = (function () {
             $("#div_feedback").css("display", "inline-block");
         },
         GetCheckboxStatus: function () {
-            debugger;
             var pageDetailData = this.GetPageDetailData();
             var checkboxarray = $("input[type='checkbox']:checked").map(function () {
                 return $(this).attr("id");
@@ -680,7 +675,6 @@ var _ModuleCommon = (function () {
     }
 })();
 $(document).ready(function () {
-    debugger;
     _Navigator.Initialize();
     //$("h1:first").focus();
 

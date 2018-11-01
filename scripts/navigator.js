@@ -147,14 +147,14 @@ var _Navigator = (function () {
             return _NData;
         },
         Start: function () {
-            debugger;
+            ;
             this.LoadPage("p1");
             if (this.IsPresenterMode()) {
                 _ModuleCommon.AppendFooter();
             }
         },
         LoadPage: function (pageId, jsonObj) {
-            debugger;
+            ;
             $(".hintcontainer").hide();
             if (_Navigator.IsRevel() && _currentPageId != undefined && _currentPageId != "") {
                 LifeCycleEvents.OnUnloadFromPlayer()
@@ -198,24 +198,13 @@ var _Navigator = (function () {
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
-                    $("h1").focus();
+                    $("#titleheader").focus();
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
-                        if (_currentPageObject.pageId == "p2") {
-                            $("#titleheader").focus();
-                        }
-                        else {
-                            if (_currentPageId != "p13") {
-                                $("#progressdiv").focus();
-                            }
-                            else {
-                                $("#Questioninfo").focus();
-                            }
-                        }
                         if (_Navigator.IsPresenterMode() && (_currentPageObject.pageId != "p13" || _currentPageObject.pageId != "summary")) {
                             _ModuleCommon.LoadPresenterMod();
                         }
@@ -231,9 +220,11 @@ var _Navigator = (function () {
                             $('#submitbtn').k_disable();
                         }
                         if (_currentPageObject.pageId == "p2")
-                            setReader("titleheader");
+                            $("#titleheader").focus();
+                        else if(_currentPageObject.pageId == "p13")
+                            $(".pageheading").focus();
                         else
-                            setReader("titleheader");
+                            $("#progressdiv").focus();
                         //$(".hintcontent").load("pagedata/hintdata/" + _currentPageObject.hinturl, function () { });
 
                         //$("h2.pageheading").focus();
@@ -466,7 +457,7 @@ var _Navigator = (function () {
             }
         },
         SetBookmarkData: function () {
-            debugger;
+            ;
             var bookmarkdata;
             if (this.IsScorm()) {
                 bookmarkdata = _ScormUtility.GetSuspendData();
@@ -488,7 +479,7 @@ var _Navigator = (function () {
             return bookmarkpageid;
         },
         Initialize: function () {
-            debugger;
+            ;
             if (packageType == "scorm") {
                 _ScormUtility.Init();
                 _Navigator.SetBookmarkData();

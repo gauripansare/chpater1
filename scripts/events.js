@@ -177,7 +177,7 @@ $(document).on("click", ".assessmentSubmit", function (event) {
     _Navigator.Next();
 });
 $(document).on('click', "#textareasubmitbtn", function (event) {
-    debugger;
+    ;
     $("#textareainputhere").k_disable();
     $("#textareasubmitbtn").k_disable();
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";

@@ -192,6 +192,17 @@
     .question-band {
         margin-left: 19%;
     }
+
+    #textareainputhere{
+        width: 98%;
+        resize: none;
+        margin-top: 5px;
+        margin-left: 2px;
+    }
+
+    .charcount {
+        margin-left: 45%;
+    }
 }
 
 @media screen and (max-width: 445px) {

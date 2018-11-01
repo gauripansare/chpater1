@@ -192,7 +192,7 @@ var _Assessment = (function () {
 			$("#linknext").k_enable();
 		},
 		ShowSummary: function () {
-			debugger;
+			;
 			var score = 0;
 			for (var b = 0; b < gRecordData.Questions.length; b++) {
 				questionObj = $("#Question").clone();
