@@ -666,7 +666,7 @@
     -webkit-box-sizing: border-box;
 }
 
-.assessmentradio:checked + .inputcircle:before {
+    .assessmentradio:checked + .inpputtext .inputcircle:before {
     content: '';
     height: 15px;
     width: 15px;
@@ -680,7 +680,7 @@
     -webkit-border-radius: 100%;
 }
 
-.assessmentradio:checked + .inputcircle {
+    .assessmentradio:checked + .inpputtext .inputcircle, #Summary .assessmentradio:checked + .inpputtext .inputcircle {
     color: #047a9c !important;
 }
 
@@ -773,12 +773,16 @@
 .question-band {
     float: left;
     margin-left: 8%;
+    position: relative;
 }
 
 .quetiontext {
     margin-left: 20px;
 }
-
+.inpputtext{
+    display: block;
+    margin: 5px 0;
+}
 /*Presenter Mode css start*/
 .presentationModeFooter {
     display: inline-block;

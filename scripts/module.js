@@ -217,7 +217,7 @@ var _ModuleCommon = (function () {
             var radio = $("input[type='radio']:checked").attr("id")
             var rarialabel = "";
             if ($("#" + radio).hasClass("correct")) {
-                rarialabel = "Correct option " + $("#" + radio).next("label").text();
+                rarialabel = "Correct option Selected " + $("#" + radio).next("label").text();
                 $("#" + radio).next("label").attr("aria-hidden", "true");
             }
             else {
