@@ -154,7 +154,6 @@ var _Navigator = (function () {
             }
         },
         LoadPage: function (pageId, jsonObj) {
-            ;
             $(".hintcontainer").hide();
             if (_Navigator.IsRevel() && _currentPageId != undefined && _currentPageId != "") {
                 LifeCycleEvents.OnUnloadFromPlayer()
@@ -225,6 +224,10 @@ var _Navigator = (function () {
                             $(".pageheading").focus();
                         else
                             $("#progressdiv").focus();
+                        
+                        if (_currentPageObject.pageId == "p12" && isIE11version){
+                            $(".intro-content").css("width", "80%");
+                        }
                         //$(".hintcontent").load("pagedata/hintdata/" + _currentPageObject.hinturl, function () { });
 
                         //$("h2.pageheading").focus();
@@ -303,7 +306,6 @@ var _Navigator = (function () {
                     $("#Summary").load("pagedata/Summary.htm", function () {
                         _Assessment.ShowSummary()
                         $("#linkprevious").k_enable();
-
                     })
                     $("#climate-deal").css("margin-left", "23%");
                     $("#linknext").k_disable();

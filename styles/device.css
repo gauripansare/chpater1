@@ -203,6 +203,12 @@
     .charcount {
         margin-left: 45%;
     }
+
+    #fotnotespan{
+        overflow-wrap: break-word;
+        width: 300px;
+        display: block;
+    }
 }
 
 @media screen and (max-width: 445px) {

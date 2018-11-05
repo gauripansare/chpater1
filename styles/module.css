@@ -270,7 +270,7 @@
     display: inline-block;
 }
 #radio-elements  {
-    margin-left: 3%;
+    padding-left: 3%;
 }
 
 #radio-elements label span {
@@ -375,7 +375,7 @@
 #checkbox-elements {
     background: #fff;
     margin-left: 2.9%;    
-    margin-right: 2%;
+    margin-right: 4%;
     border-radius: 5px;
     /*padding: 2%;*/
 }
@@ -487,7 +487,7 @@
 
 .charcount {
     float: right;
-    margin-left: 75%;
+    margin-left: 74%;
 }
 
 /*Question Css*/
@@ -709,6 +709,8 @@
 .iscorrect {
     position: absolute;
     left: -43px;
+    display: block !important;
+    padding-top: 4px;
 }
 
 .summaryquestion {
@@ -813,4 +815,8 @@ sup {
     position: absolute !important;
     opacity: 0;
     font-size: 0px !important;
+}
+
+.overflow-wrap {
+    overflow-wrap: break-word;
 }

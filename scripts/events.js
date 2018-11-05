@@ -181,15 +181,16 @@ $(document).on('click', "#textareasubmitbtn", function (event) {
     $("#textareainputhere").k_disable();
     $("#textareasubmitbtn").k_disable();
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";
-    $("#div_feedback").show();
     $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
-        $("body").animate({
-            scrollTop: $(document).height()
-        }, 1000);
+        $("#div_feedback p:first").attr("tabindex", "-1")
+        $('body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
+            $("#div_feedback p:first").focus();
+        });
     });
     _Navigator.GetCurrentPage().isAnswered = true;
     _ModuleCommon.AddReviewData(true, fdkurl);
     $("#div_feedback").show();
+    $("#div_feedback").css("display", "inline-block");
     $("#linknext").k_enable();
 });
 

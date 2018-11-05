@@ -87,9 +87,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    $("body").animate({
-                        scrollTop: $(document).height()
-                    }, 1000);
+                    $("body").animate({scrollTop: $(document).height()}, 1000);
                 });
             }
         },
@@ -103,9 +101,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    $("body").animate({
-                        scrollTop: $(document).height()
-                    }, 1000);
+                    $("body").animate({scrollTop: $(document).height()}, 1000);
                 });
                 $("textarea").k_disable();
             }
@@ -436,7 +432,10 @@ var _ModuleCommon = (function () {
                 }
             }
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
-                $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () { });
+				$("#div_feedback p:first").attr("tabindex", "-1")
+                $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
+					$("#div_feedback p:first").focus();
+				});
             });
             $("#div_feedback").show();
             $("input").k_disable();
@@ -521,7 +520,10 @@ var _ModuleCommon = (function () {
             $("#div_feedback .div_fdkcontent").html("");
             $("#div_feedback").hide();
             $(".checkmark").show();
-            $('html,body').animate({ scrollTop: document.body.scrollHeigh }, 500, function () { });
+            $('html,body').animate({ scrollTop: document.body.scrollHeigh }, 500, function () {
+                $(".radio-group div:first").attr("tabindex", "-1")
+                $(".radio-group div:first").focus();
+            });
         },
         AddReviewData: function (isCorrect, fdkurl) {
             var pageData = this.GetPageDetailData();
