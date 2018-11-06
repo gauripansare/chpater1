@@ -709,8 +709,8 @@
 .iscorrect {
     position: absolute;
     left: -43px;
-    display: block !important;
-    padding-top: 4px;
+    /*display: block !important;
+    padding-top: 4px;*/
 }
 
 .summaryquestion {

@@ -319,10 +319,11 @@ var _Assessment = (function () {
 					radioalabel = $(this).next(".inpputtext").text();
 				}
 				radioalabel = ischecked + radioalabel;
-				radioalabel = "<label class='accessibility'>"+radioalabel+"</label>";
+				radioalabel = "<label class='Accessibility'>"+radioalabel+"</label>";
 				$(this).prev(".iscorrect").before(radioalabel);
 				$(this).attr("aria-hidden", "true");
 				$(this).next().attr("aria-hidden", "true");
+				$(this).attr("disabled","true");
 
 			})
 		},

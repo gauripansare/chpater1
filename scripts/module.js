@@ -23,7 +23,11 @@ jQuery.fn.extend({
         return this.removeClass('disabled').attr("aria-disabled", "false").removeAttr("disabled");
     },
     k_disable: function () {
-        return this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
+        this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
+        if (isIE11version) {
+            $(this).removeAttr("disabled")
+        }
+        return;
     },
     k_IsDisabled: function () {
         if (this.hasClass('disabled')) { return true; } else { return false; }
@@ -431,14 +435,15 @@ var _ModuleCommon = (function () {
                     }
                 }
             }
+            $("input").k_disable();
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
 				$("#div_feedback p:first").attr("tabindex", "-1")
                 $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-					$("#div_feedback p:first").focus();
+                        $("#div_feedback p:first").focus();
 				});
             });
             $("#div_feedback").show();
-            $("input").k_disable();
+            
             $("#div_feedback").css("display", "inline-block");
         },
         GetCheckboxStatus: function () {
