@@ -24,8 +24,8 @@ jQuery.fn.extend({
     },
     k_disable: function () {
         this.addClass('disabled').attr("aria-disabled", "true").attr("disabled", "disabled");
-        if (isIE11version) {
-            $(this).removeAttr("disabled")
+        if (!isIE11version) {
+            this.attr("disabled", "disabled");
         }
         return;
     },
@@ -91,7 +91,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    $("body").animate({scrollTop: $(document).height()}, 1000);
+                    $("body").animate({ scrollTop: $(document).height() }, 1000);
                 });
             }
         },
@@ -105,7 +105,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    $("body").animate({scrollTop: $(document).height()}, 1000);
+                    $("body").animate({ scrollTop: $(document).height() }, 1000);
                 });
                 $("textarea").k_disable();
             }
@@ -272,7 +272,7 @@ var _ModuleCommon = (function () {
 
         },
         LoadPresenterMod: function () {
-             
+
             $("#linknext").k_enable();
             var pageDetailData = this.GetPageDetailData();
             if (pageDetailData != undefined) {
@@ -436,15 +436,28 @@ var _ModuleCommon = (function () {
                 }
             }
             $("input").k_disable();
-            $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
-				$("#div_feedback p:first").attr("tabindex", "-1")
-                $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-                        $("#div_feedback p:first").focus();
-				});
-            });
             $("#div_feedback").show();
-            
-            $("#div_feedback").css("display", "inline-block");
+            $("#div_feedback").css("display", "block");
+            $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
+                $("#div_feedback .div_fdkcontent p:first").attr("tabindex", "-1")
+                if(isIOS){
+                    $("#div_feedback .div_fdkcontent p:first").attr("role", "text");
+                }
+                if (isIE11version) {
+                    $("#div_feedback .div_fdkcontent p:first").focus();
+                    $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
+                    });
+                }
+                else {
+                    $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
+                        $("#div_feedback .div_fdkcontent p:first").focus();
+
+                    });
+                }
+            });
+
+
+
         },
         GetCheckboxStatus: function () {
             var pageDetailData = this.GetPageDetailData();
@@ -525,6 +538,7 @@ var _ModuleCommon = (function () {
             $("#div_feedback .div_fdkcontent").html("");
             $("#div_feedback").hide();
             $(".checkmark").show();
+
             $('html,body').animate({ scrollTop: document.body.scrollHeigh }, 500, function () {
                 $(".radio-group div:first").attr("tabindex", "-1")
                 $(".radio-group div:first").focus();
