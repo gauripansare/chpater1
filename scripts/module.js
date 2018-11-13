@@ -233,9 +233,14 @@ var _ModuleCommon = (function () {
             for (var i = 0; i < chkboxarray.length; i++) {
                 carialabel = "";
                 if ($("#" + chkboxarray[i]).hasClass("correct")) {
-                    $("#" + chkboxarray[i]).attr("cheked", "true");
-                    carialabel = "Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
-                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    if($("#" + chkboxarray[i]).prop("checked") == true){
+                        carialabel = "Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                        $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    }
+                    else{
+                        carialabel = "Correct option " + $("#" + chkboxarray[i]).next("label").text();
+                        $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    }
                 }
                 else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
                     carialabel = "Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
@@ -439,19 +444,19 @@ var _ModuleCommon = (function () {
             $("#div_feedback").show();
             $("#div_feedback").css("display", "block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
-                $("#div_feedback .div_fdkcontent p:first").attr("tabindex", "-1")
+                $("#div_feedback p:first").attr("tabindex", "-1")
+                $("#div_feedback p:first").attr("role", "text");
                 if(isIOS){
-                    $("#div_feedback .div_fdkcontent p:first").attr("role", "text");
+                    $("#div_feedback p:first").attr("role", "text");
                 }
                 if (isIE11version) {
-                    $("#div_feedback .div_fdkcontent p:first").focus();
+                    $("#div_feedback p:first").focus();
                     $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
                     });
                 }
                 else {
                     $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-                        $("#div_feedback .div_fdkcontent p:first").focus();
-
+                        $("#div_feedback p:first").focus();
                     });
                 }
             });
@@ -526,10 +531,10 @@ var _ModuleCommon = (function () {
                 $('input[type="radio"]:checked').next("label").find("span").removeClass("without-before")
                 //$('input[type="radio"]:checked').removeAttr("aria-hidden");
                 //$('input[type="radio"]:checked').next("label").find("i").remove();
+                $("input[type='radio']:not(.correct)").k_enable();
                 $("input[type='radio']:not(.correct)").removeAttr("checked").removeAttr("aria-label");
             }
             $("input[type='radio']:not(.correct)").next("label").next(".Accessibility").remove();
-            $("input[type='radio']:not(.correct)").k_enable();
             $('input[type="radio"]:not(.correct)').next("label").removeAttr("aria-hidden");
             $("input[type='radio']:not(.correct)").removeAttr("aria-hidden");
             $("input[type='radio'].incorrect").next("label").find("i").remove();
@@ -676,9 +681,16 @@ var _ModuleCommon = (function () {
                     ischecked = ischecked + " not checked "
                 }
                 if ($("#" + chkboxarray[i]).hasClass("correct")) {
-                    $("#" + chkboxarray[i]).attr("checked", "true");
-                    carialabel = ischecked + " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
-                    $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    if($("#" + chkboxarray[i]).prop("checked") == true){
+                        $("#" + chkboxarray[i]).attr("checked", "true");
+                        carialabel = ischecked + " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
+                        $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    }
+                    else{
+                        $("#" + chkboxarray[i]).attr("checked", "true");
+                        carialabel = ischecked + " Correct option " + $("#" + chkboxarray[i]).next("label").text();
+                        $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
+                    }
                 }
                 else if ($("#" + chkboxarray[i]).hasClass("incorrect")) {
                     carialabel = ischecked + " Incorrect option selected " + $("#" + chkboxarray[i]).next("label").text();
