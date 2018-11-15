@@ -148,8 +148,11 @@
     outline: none;
     border: none;
 }
-
-.divreviewsubmit {
+.divHotSpot:hover,.divHotSpotdbl:hover {
+    box-shadow: 0 2px 16px -5px #000;
+    opacity: 0.8;
+  }
+.divreviewsubmit{
     display: flex;
     justify-content: center;
 }
@@ -785,6 +788,9 @@
     display: block;
     margin: 5px 0;
 }
+#Summary .inpputtext{
+   margin: 0px;
+}
 /*Presenter Mode css start*/
 .presentationModeFooter {
     display: inline-block;
@@ -793,6 +799,10 @@
     width: 100%;
         color: white;
     text-align: center;
+}
+.accessibility{
+    font-size: 0;
+    opacity: 0;
 }
 /*presenter Mode css End*/
 
