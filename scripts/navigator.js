@@ -7,7 +7,6 @@ var _Navigator = (function () {
     var progressLevels = [18];
     var totalsimscore = 24;
     var submitCounter = 0;
-    var submitCounter = 0;
     var bookmarkpageid = "";
     var quizpageid = "p13";
     var _NData = {
@@ -157,8 +156,9 @@ var _Navigator = (function () {
             }
         },
         LoadPage: function (pageId, jsonObj) {
+            submitCounter = 0;
             $(".hintcontainer").hide();
-             $(".header-content-dock").css({"visibility":"hidden"});
+            $(".header-content-dock").css({ "visibility": "hidden" });
             if (_Navigator.IsRevel() && _currentPageId != undefined && _currentPageId != "") {
                 LifeCycleEvents.OnUnloadFromPlayer()
             }
@@ -168,7 +168,7 @@ var _Navigator = (function () {
             }
             _currentPageId = pageId;
             _currentPageObject = _NData[_currentPageId]
-            if(_currentPageObject.hasActivity == undefined || _currentPageObject.hasActivity == false){
+            if (_currentPageObject.hasActivity == undefined || _currentPageObject.hasActivity == false) {
                 this.SetPageStatus(true);
             }
             this.UpdateProgressBar();
@@ -177,7 +177,7 @@ var _Navigator = (function () {
             $("#header-title").show();
             $("footer").show();
 
-            $('html,body').css({ scrollTop: 0 })
+            //$('html,body').css({ scrollTop: 0 })
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
                 $("#linkprevious").k_disable();
                 $("#linknext").k_enable();
@@ -204,13 +204,12 @@ var _Navigator = (function () {
 
             var pageUrl = _Settings.dataRoot + _currentPageObject.dataurl + _Caching.GetUrlExtension();
             if (_currentPageObject.pageId == "p2") { // temporary fix
-                $("#progressdiv").css("margin-left", "-20px")               
+                $("#progressdiv").css("margin-left", "-20px")
             }
-            else
-            {               
+            else {
                 $("#progressdiv").css("margin-left", "-15px")
             }
-          
+
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
@@ -221,6 +220,7 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
+                        $(".intro-content h2").attr("tabindex", "-1");
                         if (_Navigator.IsPresenterMode() && _currentPageObject.pageId != "p13") {
                             _ModuleCommon.LoadPresenterMod();
                         }
@@ -241,21 +241,24 @@ var _Navigator = (function () {
                         }
                         if (_currentPageObject.pageId == "p2")
                             $("#titleheader").focus();
-                        else if(_currentPageObject.pageId == "p13")
-                            $(".pageheading").focus();
-                        else
-                            $("#progressdiv").focus();
-                        
-                        if (_currentPageObject.pageId == "p12" && isIE11version){
+                        else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
+                            $("h2").focus();
+                        }
+                        else {
+                            if (isChrome && !isAndroid) {
+                                $("h2").focus();
+                            }
+                            else {
+                                $("#progressdiv").focus();
+                            }
+                            // setReader("progressdiv");
+                        }
+                        _NData[_currentPageId].isLoaded = true;
+
+                        if (_currentPageObject.pageId == "p12" && isIE11version) {
                             $(".intro-content").css("width", "80%");
                         }
-                        //$(".hintcontent").load("pagedata/hintdata/" + _currentPageObject.hinturl, function () { });
-
-                        //$("h2.pageheading").focus();
                         _Navigator.GetBookmarkData();
-                        if (_currentPageObject.pageId == "p2") {
-                            $("#titleheader").focus();
-                        }
                     });
                 })
             }
@@ -298,7 +301,7 @@ var _Navigator = (function () {
 
         },
         Next: function () {
-                    if (_Navigator.IsRevel()) {
+            if (_Navigator.IsRevel()) {
                 LifeCycleEvents.OnInteraction("Next link click.")
             }
             $("#linkprevious").k_enable();
@@ -438,20 +441,18 @@ var _Navigator = (function () {
                 return false;
             }
         },
-      SetVideoStatus: function(){
+        SetVideoStatus: function () {
             _NData[_currentPageId].played = true;
         },
         SetBookmarkData: function () {
             var bookmarkdata;
-            if(this.IsScorm())
-            {
+            if (this.IsScorm()) {
                 bookmarkdata = _ScormUtility.GetSuspendData();
             }
-            else if(this.IsRevel())
-            {
+            else if (this.IsRevel()) {
                 bookmarkdata = JSON.stringify(k_Revel.get_StateData())
             }
-            
+
             if (bookmarkdata != undefined && bookmarkdata != "") {
                 bookmarkdata = JSON.parse(bookmarkdata);
                 bookmarkpageid = bookmarkdata.BMPageId;
@@ -572,7 +573,7 @@ var _Navigator = (function () {
         GetPackageType: function () {
             return packageType;
         },
-        GetQuizPageId:function(){
+        GetQuizPageId: function () {
             return quizpageid;
         }
     };

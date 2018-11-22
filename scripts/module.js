@@ -91,7 +91,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    $("body").animate({ scrollTop: $(document).height() }, 1000);
+                    window.scrollTo(0,document.body.scrollHeight);
                 });
             }
         },
@@ -105,7 +105,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    $("body").animate({ scrollTop: $(document).height() }, 1000);
+                    window.scrollTo(0,document.body.scrollHeight);
                 });
                 $("textarea").k_disable();
             }
@@ -442,29 +442,12 @@ var _ModuleCommon = (function () {
             }
             $("input").k_disable();
             $("#div_feedback").show();
-            $("#div_feedback").css("display", "block");
+            $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
                 $("#div_feedback p:first").attr("tabindex", "-1")
-                $("#div_feedback p:first").attr("role", "text");
-                if(isIOS){
-                    $("#div_feedback p:first").attr("role", "text");
-                }
-                    window.scrollTo(0,document.body.scrollHeight)
-                    $("#div_feedback p:first").focus();
-                /*if (isIE11version) {
-                    $("#div_feedback p:first").focus();
-                    $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-                    });
-                }
-                else {
-                    $('html,body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-                        $("#div_feedback p:first").focus();
-                    });
-                }*/
+                window.scrollTo(0,document.body.scrollHeight);
+                $("#div_feedback p:first").focus();
             });
-
-
-
         },
         GetCheckboxStatus: function () {
             var pageDetailData = this.GetPageDetailData();

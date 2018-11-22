@@ -36,7 +36,6 @@ $(document).on("click", "#linknext", function (event) {
     _Navigator.Next();
 });
 $(document).on("click", ".hintdoc", function (event) {
-    debugger;
     if ($(this).hasClass("hintdoc")) {
         if ($(this).hasClass("expanded")) {
             $(this).removeClass("expanded")
@@ -144,7 +143,6 @@ $(document).on('click', "#start", function (event) {
 });
 $(document).on('click', "#submitbtn", function (event) {
     if ($(this).k_IsDisabled()) return;
-  
     _ModuleCommon.OnSubmit();
 });
 $(document).on('click', "#continuebtn", function (event) {
@@ -250,9 +248,8 @@ $(document).on('click', "#textareasubmitbtn", function (event) {
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";
     $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
         $("#div_feedback p:first").attr("tabindex", "-1")
-        $('body').animate({ scrollTop: document.body.scrollHeight }, animTime, function () {
-            $("#div_feedback p:first").focus();
-        });
+        window.scrollTo(0,document.body.scrollHeight);
+        $("#div_feedback p:first").focus();
     });
     _Navigator.GetCurrentPage().isAnswered = true;
     _ModuleCommon.AddReviewData(true, fdkurl);

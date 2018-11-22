@@ -1,6 +1,6 @@
 ﻿gRecordData = {
     Status: "NotStarted",
-    AssessmentScore: 10,
+    AssessmentScore: 5,
     VisitedNumberOfPages: "0",
     LastVisitedPage: "", // UserSelectedOptionId will be used to jump to the unattempted question
     RecordTitle: "How Does Barbara Corcoran Pick Her Investments on Shark Tank?",
