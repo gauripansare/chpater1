@@ -139,7 +139,8 @@ $(document).on('click', ".activityimg", function (event) {
 
 $(document).on('click', "#start", function (event) {
     if ($(this).k_IsDisabled()) return;
-    _Navigator.Next();
+    //_Navigator.Next();
+    _Navigator.LoadPage("p13");
 });
 $(document).on('click', "#submitbtn", function (event) {
     if ($(this).k_IsDisabled()) return;
@@ -246,8 +247,13 @@ $(document).on('click', "#textareasubmitbtn", function (event) {
     $("#textareainputhere").k_disable();
     $("#textareasubmitbtn").k_disable();
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";
+    $("#div_feedback").show();
+    $("#div_feedback").css("display", "inline-block");
     $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
-        $("#div_feedback p:first").attr("tabindex", "-1")
+        $("#div_feedback p:first").attr("tabindex", "-1");
+        if (isIOS) {
+            $("#div_feedback p:first").attr("role", "text")
+        }
         window.scrollTo(0,document.body.scrollHeight);
         $("#div_feedback p:first").focus();
     });

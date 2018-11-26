@@ -220,7 +220,7 @@ var _Navigator = (function () {
                     $(".main-content").load(pageUrl, function () {
                         $(this).fadeTo(600, 1)
                         OnPageLoad();
-                        $(".intro-content h2").attr("tabindex", "-1");
+                        $("h2").attr("tabindex", "-1");
                         if (_Navigator.IsPresenterMode() && _currentPageObject.pageId != "p13") {
                             _ModuleCommon.LoadPresenterMod();
                         }
@@ -242,6 +242,12 @@ var _Navigator = (function () {
                         if (_currentPageObject.pageId == "p2")
                             $("#titleheader").focus();
                         else if ((isIphone || isAndroid) && _NData[_currentPageId].isLoaded != undefined && _NData[_currentPageId].isLoaded == true) {//iphone android on previous focus is set to header
+                            $("h2").focus();
+                        }
+                        else if (_currentPageObject.pageId == quizpageid){
+                            if (isIOS) {
+                                $("h2").attr("role", "text")
+                            }
                             $("h2").focus();
                         }
                         else {
