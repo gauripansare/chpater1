@@ -139,8 +139,8 @@ $(document).on('click', ".activityimg", function (event) {
 
 $(document).on('click', "#start", function (event) {
     if ($(this).k_IsDisabled()) return;
-    //_Navigator.Next();
-    _Navigator.LoadPage("p13");
+    _Navigator.Next();
+   // _Navigator.LoadPage("p13");
 });
 $(document).on('click', "#submitbtn", function (event) {
     if ($(this).k_IsDisabled()) return;
