@@ -38,6 +38,9 @@ var _Assessment = (function () {
 			}
 
 		},
+		SetCurrentQuestionIndex: function(questionIndex){
+			currentQuestionIndex = questionIndex;
+		},
 		Shuffle: function (array) {
 			var currentIndex = array.length, temporaryValue, randomIndex;
 
@@ -92,16 +95,24 @@ var _Assessment = (function () {
 					optionObj.find(".inpputtext").attr("aria-hidden", "true")
 				}
 			}
-      $(".question-band .assessmentradio").unwrap();
-			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 5");
+			$(".question-band .assessmentradio").unwrap();
+			$("#Questioninfo").empty();
+
+			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 4")
 			//removeCSS("styles/questionPlaceholder.css")
 			if (isSafari && !iOS) {
 				$("#QuetionText").attr("aria-hidden", "true");
 				$("#QuetionText").closest(".questioninnerwrapper").attr("aria-label", "question number " + (currentQuestionIndex + 1) + ") " + currQustion.QuestionText);
 			}
-			$(".intro-content-question").fadeIn(600)
+				if (gRecordData.Status == "Completed") {
+				$(".intro-content-question").show();
+			}
+			else
+			{
+				$(".intro-content-question").fadeIn(600)
+			}
 
-			$("#Questioninfo").focus();
+			
 			if (gRecordData.Status != "Completed") {
 				$("#linknext").k_disable();
 				if (currentQuestionIndex != 0) {
@@ -118,6 +129,9 @@ var _Assessment = (function () {
 			_Navigator.UpdateProgressBar();
 			$(".assessmentSubmit").k_disable();
 			_Navigator.GetBookmarkData();
+			
+			$("#Questioninfo").focus();
+			
 		},
 		ShowQuestionPresenterMode: function () {
 			var currQuestion = gRecordData.Questions[currentQuestionIndex];

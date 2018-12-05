@@ -621,18 +621,23 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
-        AppendFooter: function () {
+ AppendFooter: function () {
             if ($(".presentationModeFooter").length == 0) {
                 var str = '<div class="presentationModeFooter">Presentation Mode</div>';
                 $("footer").append($(str));
                 $("footer").show();
                 $("#linknext").k_enable();
             }
-            else {
+        },
+        AppendScormReviewFooter: function () {
+            if ($(".ScormReviewFooter").length == 0) {
+                var str = '<div class="ScormReviewFooter"> Review Mode</div>';
+                $("footer").append($(str));
                 $("footer").show();
                 $("#linknext").k_enable();
             }
         },
+
         SetCustomarialabelforRadio: function () {
             $(".Accessibility").remove();
             $("input[type='radio']").each(function () {
