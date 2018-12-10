@@ -98,7 +98,7 @@ var _Assessment = (function () {
 			$(".question-band .assessmentradio").unwrap();
 			$("#Questioninfo").empty();
 
-			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 4")
+			$("#Questioninfo").text("Performance Check: Mini-Quiz: Question " + parseInt(currentQuestionIndex + 1) + " of 5")
 			//removeCSS("styles/questionPlaceholder.css")
 			if (isSafari && !iOS) {
 				$("#QuetionText").attr("aria-hidden", "true");
