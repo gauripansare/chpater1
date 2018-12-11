@@ -91,7 +91,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    window.scrollTo(0,document.body.scrollHeight);
+                    window.scrollTo(0, document.body.scrollHeight);
                 });
             }
         },
@@ -105,7 +105,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
                     //this.SetFeedbackTop()
-                    window.scrollTo(0,document.body.scrollHeight);
+                    window.scrollTo(0, document.body.scrollHeight);
                 });
                 $("textarea").k_disable();
             }
@@ -233,11 +233,11 @@ var _ModuleCommon = (function () {
             for (var i = 0; i < chkboxarray.length; i++) {
                 carialabel = "";
                 if ($("#" + chkboxarray[i]).hasClass("correct")) {
-                    if($("#" + chkboxarray[i]).prop("checked") == true){
+                    if ($("#" + chkboxarray[i]).prop("checked") == true) {
                         carialabel = "Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
                         $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                     }
-                    else{
+                    else {
                         carialabel = "Correct option " + $("#" + chkboxarray[i]).next("label").text();
                         $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                     }
@@ -262,11 +262,13 @@ var _ModuleCommon = (function () {
                 $("input[type='radio']").addClass("pageradio");
                 $("#submitbtn").k_disable();
             }
-            if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
-                this.DisplayUserReviewMode();
-            }
-            else {
-                this.RemoveReviewData();
+            if (!_Navigator.IsPresenterMode()) {
+                if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
+                    this.DisplayUserReviewMode();
+                }
+                else {
+                    this.RemoveReviewData();
+                }
             }
             if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) {
                 $('#footer-navigation').css('display', 'table');
@@ -277,8 +279,12 @@ var _ModuleCommon = (function () {
 
         },
         LoadPresenterMod: function () {
-
             $("#linknext").k_enable();
+            var currPage = _Navigator.GetCurrentPage();
+            _Navigator.SetPageStatus(true);
+            if(currPage.pageId == "p12"){
+                $("#textareainputhere").k_disable();
+            }
             var pageDetailData = this.GetPageDetailData();
             if (pageDetailData != undefined) {
                 $("#" + pageDetailData.radio).next("label").find("span").after(' <i class="fa radio-fa-check fa-check" style="font-size:15px;color:#01662C;"></i>');
@@ -448,7 +454,7 @@ var _ModuleCommon = (function () {
                 if (isIOS) {
                     $("#div_feedback p:first").attr("role", "text")
                 }
-                window.scrollTo(0,document.body.scrollHeight);
+                window.scrollTo(0, document.body.scrollHeight);
                 $("#div_feedback p:first").focus();
             });
         },
@@ -536,10 +542,10 @@ var _ModuleCommon = (function () {
                 $(".radio-group div:first").attr("tabindex", "-1")
                 $(".radio-group div:first").focus();
             });
-            if($('input[type="radio"]:checked').hasClass("correct")){
+            if ($('input[type="radio"]:checked').hasClass("correct")) {
                 $("input[type='checkbox']:not(.correct)").k_enable();
             }
-            else{
+            else {
                 $("input[type='checkbox']").k_disable();
             }
         },
@@ -621,7 +627,7 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
- AppendFooter: function () {
+        AppendFooter: function () {
             if ($(".presentationModeFooter").length == 0) {
                 var str = '<div class="presentationModeFooter">Presentation Mode</div>';
                 $("footer").append($(str));
@@ -680,12 +686,12 @@ var _ModuleCommon = (function () {
                     ischecked = ischecked + " not checked "
                 }
                 if ($("#" + chkboxarray[i]).hasClass("correct")) {
-                    if($("#" + chkboxarray[i]).prop("checked") == true){
+                    if ($("#" + chkboxarray[i]).prop("checked") == true) {
                         $("#" + chkboxarray[i]).attr("checked", "true");
                         carialabel = ischecked + " Correct option selected " + $("#" + chkboxarray[i]).next("label").text();
                         $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
                     }
-                    else{
+                    else {
                         $("#" + chkboxarray[i]).attr("checked", "true");
                         carialabel = ischecked + " Correct option " + $("#" + chkboxarray[i]).next("label").text();
                         $("#" + chkboxarray[i]).next("label").attr("aria-hidden", "true");
