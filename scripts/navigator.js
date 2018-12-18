@@ -1,7 +1,7 @@
 ﻿//This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "scorm";//presenter/scorm/revel
+    var packageType = "presenter";//presenter/scorm/revel
     var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
@@ -224,7 +224,14 @@ var _Navigator = (function () {
             if (_currentPageObject.isStartPage) {
                 $(".main-content").load(pageUrl, function () {
                     OnPageLoad();
-                    $("#titleheader").focus();
+                    //setReader("header1");
+                    $("#header1").focus();
+                    if (_Navigator.IsPresenterMode()) {
+                        $(".wrapper-img").prepend('<div class="presentationModeFooter" >Presentation Mode</div>')
+                        $("footer").show();
+                        $("#linknext").k_enable();
+                    }
+                  
                 });
             } else {
                 $(".main-content").fadeTo(250, 0.25, function () {
@@ -284,21 +291,7 @@ var _Navigator = (function () {
             }
 
         },
-        LoadDefaultQuestion: function () {
-            if (_currentPageObject.questions.length > 0) {
-                _questionId = 0;
-                _currentPageObject.questions[0].isQuestionVisit = true;
-                for (var i = 0; i < _currentPageObject.questions.length; i++) {
-                    if (_currentPageObject.questions[i].isCurrent) {
-                        _questionId = i;
-                    }
-                }
-                //second parameter is to disable question effect.
-                _Question.Load(_currentPageObject.questions[_questionId], {
-                    disableEffect: true
-                });
-            }
-        },
+
         Prev: function () {
             if (_Navigator.IsRevel()) {
                 LifeCycleEvents.OnInteraction("Previous link click.")
@@ -385,6 +378,7 @@ var _Navigator = (function () {
         UpdateProgressBar: function () {
             var progData = this.GetProgressData();
             var lprog_pecent = (progData * 100 / progressLevels[0]).toFixed(0);
+            $(".progressdiv").empty();
             $(".progressdiv").text("Progress: " + lprog_pecent + "%");
             $(".progressFg").css("width", lprog_pecent + "%");
 
@@ -614,38 +608,5 @@ function setReader(idToStartReading) {
     $('#hiddenAnchor').attr("href", "#" + idToStartReading)
     $('#hiddenAnchor')[0].click()
 }
-function removeCSS(cssFileToRemove) {
-    for (var w = 0; w < document.styleSheets.length; w++) {
-        if (document.styleSheets[w].href.indexOf(cssFileToRemove) != -1) {
-            document.styleSheets[w].disabled = true;
-        }
-    }
-}
-function addCSS(cssFileToAdd) {
-    var isCSSAlreadyAdded = false;
-    for (var w = 0; w < document.styleSheets.length; w++) {
-        if (document.styleSheets[w].href.indexOf(cssFileToAdd) != -1) {
-            isCSSAlreadyAdded = false;
-        }
-    }
-    console.log(isCSSAlreadyAdded + " --")
-    if (!isCSSAlreadyAdded) {
-        var newlink = document.createElement("link");
-        newlink.setAttribute("rel", "stylesheet");
-        newlink.setAttribute("type", "text/css");
-        newlink.setAttribute("href", cssFileToAdd);
-        document.getElementsByTagName("head").item(0).appendChild(newlink);
-    }
-}
 
-function changeCSS(cssFile, cssLinkIndex) {
 
-    var oldlink = document.getElementsByTagName("link").item(cssLinkIndex);
-
-    var newlink = document.createElement("link");
-    newlink.setAttribute("rel", "stylesheet");
-    newlink.setAttribute("type", "text/css");
-    newlink.setAttribute("href", cssFile);
-
-    document.getElementsByTagName("head").item(0).replaceChild(newlink, oldlink);
-}
