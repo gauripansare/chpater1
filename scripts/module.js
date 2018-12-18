@@ -297,6 +297,9 @@ var _ModuleCommon = (function () {
                     $("input[type='checkbox']").css({ "position": "absolute", "opacity": "0" });
                 }
             }
+            if(_Navigator.GetCurrentPage().pageId == "p12"){
+                $("#textareainputhere").addClass("disabled")
+            }
             this.SetAccessibility();
             if (isFirefox || isIE11version) {
                 this.SetCustomarialabelforRadio();
@@ -304,6 +307,7 @@ var _ModuleCommon = (function () {
             if (isIE11version) {
                 //this.IECustomCheckboxAccessbility();
             }
+            _Navigator.SetPageStatus(true)
 
         },
         Applycss: function () {
@@ -621,13 +625,12 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
- AppendFooter: function () {
-            if ($(".presentationModeFooter").length == 0) {
-                var str = '<div class="presentationModeFooter">Presentation Mode</div>';
-                $("footer").append($(str));
+        AppendFooter: function () {           
+                $("#header-progress .presentationModeFooter").show();             
+                
                 $("footer").show();
-                $("#linknext").k_enable();
-            }
+                $("#linknext").k_enable();           
+            
         },
         AppendScormReviewFooter: function () {
             if ($(".ScormReviewFooter").length == 0) {
@@ -708,11 +711,5 @@ var _ModuleCommon = (function () {
 })();
 $(document).ready(function () {
     _Navigator.Initialize();
-    //$("h1:first").focus();
-
-    //if (_Settings.enableCache) {
-    //    _Caching.InitAssetsCaching();
-    //    _Caching.InitPageCaching();
-    //}
     $('body').attr({ "id": "thebody", "onmousedown": "document.getElementById('thebody').classList.add('no-focus');", "onkeydown": "document.getElementById('thebody').classList.remove('no-focus');" })
 });
