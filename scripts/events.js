@@ -302,15 +302,13 @@ window.addEventListener("scroll", function () {
         $(".header-content-dock").find(".presentationModeFooter").hide();
 
     }
-    if (_Navigator.GetCurrentPage().pageId == _Navigator.GetQuizPageId() || currPage.hinturl ==undefined || currPage.hinturl == "" )
-    {
+    if (_Navigator.GetCurrentPage().pageId == _Navigator.GetQuizPageId() || currPage.hinturl == undefined || currPage.hinturl == "") {
         $(".hintdoc").parent().hide();
     }
-    else
-    {
+    else {
         $(".hintdoc").parent().show();
     }
-    if(_Navigator.IsPresenterMode())
+    if(_Navigator.IsPresenterMode() || _Navigator.IsReviewMode())
     {
         $(".header-content-dock").find(".presentationModeFooter").show();
         $(".header-content-dock .intro-content").css({"margin-top":"30px"})
