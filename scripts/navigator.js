@@ -145,6 +145,11 @@ var _Navigator = (function () {
             $(".startbtn").k_disable();
         }
         if (_Navigator.IsReviewMode()) {
+            currentQuestionIndex = 0;
+            $("input[type='radio']").k_disable();
+            $("input[type='checkbox']").k_disable();
+            $("#textareainputhere").k_disable();
+            $("#textareasubmitbtn").k_disable();
             $("#linknext").k_enable();
             $(".startbtn").k_disable();
         }
@@ -367,9 +372,7 @@ GetSummarybookmark: function () {
                     currentQuestionIndex = currentQuestionIndex + 1
                     $("#Questioninfo").show();
                     _Assessment.ShowQuestion()
-
-                    //this.UpdateProgressBar();
-                    if (gRecordData.Status != "Completed" && !this.IsPresenterMode()) {
+                    if (gRecordData.Status != "Completed" && !this.IsPresenterMode() && !this.IsReviewMode()) {
                         $("#linknext").k_disable();
                         $("#linkprevious").k_disable();
                     }
