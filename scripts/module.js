@@ -261,13 +261,11 @@ var _ModuleCommon = (function () {
                 $("input[type='radio']").addClass("pageradio");
                 $("#submitbtn").k_disable();
             }
-            if (!_Navigator.IsPresenterMode()) {
-                if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
-                    this.DisplayUserReviewMode();
-                }
-                else {
-                    this.RemoveReviewData();
-                }
+            if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
+                this.DisplayUserReviewMode();
+            }
+            else {
+                this.RemoveReviewData();
             }
             if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) {
                 $('#footer-navigation').css('display', 'table');
@@ -279,6 +277,7 @@ var _ModuleCommon = (function () {
         },
         LoadPresenterMod: function () {
             $("#linknext").k_enable();
+            /*
             var currPage = _Navigator.GetCurrentPage();
             _Navigator.SetPageStatus(true);
             if(currPage.pageId == "p12"){
@@ -313,6 +312,7 @@ var _ModuleCommon = (function () {
                 //this.IECustomCheckboxAccessbility();
             }
             _Navigator.SetPageStatus(true)
+            */
 
         },
         Applycss: function () {
@@ -630,19 +630,19 @@ var _ModuleCommon = (function () {
                 $("#div_feedback").css("margin-top", (pdiff + 35) + "px");
             }
         },
-        AppendFooter: function () {           
-                $("#header-progress .presentationModeFooter").show();             
-                
-                $("footer").show();
-                $("#linknext").k_enable();           
-            
+        AppendFooter: function () {
+            $("#header-progress .presentationModeFooter").show();
+
+            $("footer").show();
+            $("#linknext").k_enable();
+
         },
         AppendScormReviewFooter: function () {
-             $(".presentationModeFooter").html('Review Mode');
-            $("#header-progress .presentationModeFooter").show();           
-                
-                $("footer").show();
-                $("#linknext").k_enable();   
+            $(".presentationModeFooter").html('Review Mode');
+            $("#header-progress .presentationModeFooter").show();
+
+            $("footer").show();
+            $("#linknext").k_enable();
             /*
             if ($(".ScormReviewFooter").length == 0) {
                 var str = '<div class="ScormReviewFooter"> Review Mode</div>';
