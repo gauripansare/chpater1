@@ -1,7 +1,7 @@
 ﻿//This api will contain navigation logic and page load.
 //It will also handle the question navigation if the page is having multiple questions.
 var _Navigator = (function () {
-    var packageType = "presenter";//presenter/scorm/revel
+    var packageType = "";//presenter/scorm/revel
     var isReviewMode = false;
     var _currentPageId = "";
     var _currentPageObject = {};
@@ -151,7 +151,7 @@ var _Navigator = (function () {
             $("#textareainputhere").k_disable();
             $("#textareasubmitbtn").k_disable();
             $("#linknext").k_enable();
-            $(".startbtn").k_disable();
+            $(".startbtn").link_k_disable();
         }
         if (_Navigator.IsPresenterMode() || _Navigator.IsReviewMode()) {
             if(isIphone || isAndroid){
@@ -199,7 +199,7 @@ var _Navigator = (function () {
 
             //$('html,body').css({ scrollTop: 0 })
             if (_currentPageObject.isStartPage != undefined && _currentPageObject.isStartPage) {
-                $("#linkprevious").k_disable();
+                $("#linkprevious").link_k_disable();
                 $("#linknext").k_enable();
                 $("footer").hide();
                 $("#header-progress").hide();
@@ -212,7 +212,7 @@ var _Navigator = (function () {
             }
 
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity && !this.IsAnswered()) {
-                $("#linknext").k_disable();
+                $("#linknext").link_k_disable();
                 $('#submitbtn').k_disable();
             }
             if (this.IsAnswered()) {
@@ -220,7 +220,7 @@ var _Navigator = (function () {
 
             }
             if (_currentPageObject.isLastPage != undefined && _currentPageObject.isLastPage) {
-                $("#linknext").k_disable();
+                $("#linknext").link_k_disable();
             }
 
             _currentPageObject.isVisited = true;
@@ -279,7 +279,7 @@ var _Navigator = (function () {
 
                                 })
                                 $("#climate-deal").css("margin-left", "23%");
-                                $("#linknext").k_disable();
+                                $("#linknext").link_k_disable();
                             }
                             else {
                                 _Assessment.ShowQuestion();
@@ -373,8 +373,8 @@ GetSummarybookmark: function () {
                     $("#Questioninfo").show();
                     _Assessment.ShowQuestion()
                     if (gRecordData.Status != "Completed" && !this.IsPresenterMode() && !this.IsReviewMode()) {
-                        $("#linknext").k_disable();
-                        $("#linkprevious").k_disable();
+                        $("#linknext").link_k_disable();
+                        $("#linkprevious").link_k_disable();
                     }
                 }
 
@@ -394,7 +394,7 @@ Summarybookmark = true;
                         $("#linkprevious").k_enable();
                     })
                     $("#climate-deal").css("margin-left", "23%");
-                    $("#linknext").k_disable();
+                    $("#linknext").link_k_disable();
 
 
                 }

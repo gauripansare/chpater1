@@ -114,9 +114,9 @@ var _Assessment = (function () {
 
 			
 			if (gRecordData.Status != "Completed") {
-				$("#linknext").k_disable();
+				$("#linknext").link_k_disable();
 				if (currentQuestionIndex != 0) {
-					$("#linkprevious").k_disable();
+					$("#linkprevious").link_k_disable();
 				}
 			}
 			if (_Navigator.IsPresenterMode()) {

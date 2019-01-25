@@ -3,6 +3,7 @@ var hotspot;
 var touchend = false;
 var touchend1 = false;
 $(document).on("click", ".divHotSpot", function (event) {
+    if ($(this).k_IsDisabled()) return;
     if (_Navigator.IsPresenterMode()) {
         return;
     }
@@ -36,6 +37,7 @@ $(document).on("click", "#linknext", function (event) {
     _Navigator.Next();
 });
 $(document).on("click", ".hintdoc", function (event) {
+    if ($(this).k_IsDisabled()) return;
     if ($(this).hasClass("hintdoc")) {
         if ($(this).hasClass("expanded")) {
             $(this).removeClass("expanded")
@@ -131,6 +133,7 @@ $(window).resize(function () {
 
 
 $(document).on('click', ".activityimg", function (event) {
+    if ($(this).k_IsDisabled()) return;
     if ($(".divHotSpot").hasClass("disabled") || $(".divHotSpot").length == 0)
         return;
     _ModuleCommon.AddEditPropertiesClick(event);
@@ -152,6 +155,7 @@ $(document).on('click', "#continuebtn", function (event) {
 
 
 $(document).on('change', "input[type='checkbox'].pagecheckbox", function (event) {
+    if ($(this).k_IsDisabled()) return;
     _ModuleCommon.EnableSubmit();
     if ($(this).prop("checked") == true) {
         $(this).next("label").css({ "font-weight": "bold" })
@@ -163,6 +167,7 @@ $(document).on('change', "input[type='checkbox'].pagecheckbox", function (event)
 
 });
 $(document).on('change', "input[type='radio'].pageradio", function (event) {
+    if ($(this).k_IsDisabled()) return;
     _ModuleCommon.EnableSubmit();
     $('input[type="radio"]:checked').addClass('beforeClass');
 });
@@ -174,6 +179,7 @@ $(document).on('change', "input[type='radio'].pageradio", function (event) {
 
 
 $(document).on('click', ".reviewsubmit", function (event) {
+    if ($(this).k_IsDisabled()) return;
     _Navigator.Next();
 });
 
@@ -243,7 +249,7 @@ $(document).on('click', ".inputcircle", function (event) {
     $(this).next(".inpputtext").trigger("click");
 });
 $(document).on('click', "#textareasubmitbtn", function (event) {
-    ;
+    if ($(this).k_IsDisabled()) return;
     $("#textareainputhere").k_disable();
     $("#textareasubmitbtn").k_disable();
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";
@@ -265,6 +271,7 @@ $(document).on('click', "#textareasubmitbtn", function (event) {
 });
 
 $(document).on("keyup", "#textareainputhere", function (event) {
+    if ($(this).k_IsDisabled()) return;
     var max = 300;
     var len = $(this).val().length;
     var char = max - len;

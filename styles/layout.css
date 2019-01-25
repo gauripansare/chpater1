@@ -84,9 +84,9 @@ input[type='button'], button {
 
 a:focus, input:focus, button:focus, textarea:focus, select:focus, a:active, input:active, 
 button:active, textarea:active, select:active,
- .questioninnerwrapper input[type="radio"]:focus + .inputcircle::after,
- #Summary input[type="radio"]:focus + .inputcircle::after {
-    outline: #ff8c00 auto 3px;
+ .questioninnerwrapper input[type="radio"]:focus + label,
+ input[type="radio"]:focus + label, input[type="checkbox"]:focus + label {
+    outline: #ff8c00 solid 2px;
 }
 
 #appmenu *:focus, #appmenu *:active {
