@@ -251,7 +251,7 @@ $(document).on('click', ".inputcircle", function (event) {
 $(document).on('click', "#textareasubmitbtn", function (event) {
     if ($(this).k_IsDisabled()) return;
     $("#textareainputhere").k_disable();
-    $("#textareasubmitbtn").k_disable();
+    $("#textareasubmitbtn").link_k_disable();
     var fdkurl ="pagedata/feedbackdata/textareafeedback.htm";
     $("#div_feedback").show();
     $("#div_feedback").css("display", "inline-block");
@@ -280,7 +280,7 @@ $(document).on("keyup", "#textareainputhere", function (event) {
         $("#textareasubmitbtn").k_enable();
     }
     else{
-        $("#textareasubmitbtn").k_disable();
+        $("#textareasubmitbtn").link_k_disable();
     }
 });
 

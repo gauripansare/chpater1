@@ -112,7 +112,7 @@ var _ModuleCommon = (function () {
                 $("textarea").k_disable();
             }
             else {
-                $("input").k_disable();
+                $("input").link_k_disable();
                 this.DisplayCheckboxCorrectIncorrect();
                 this.ShowFeedbackReviewMode();
             }
@@ -257,12 +257,12 @@ var _ModuleCommon = (function () {
             this.ApplycontainerWidth();
             $("#div_feedback").hide();
             $('#hintdiv').hide();
-            $("#textareasubmitbtn").k_disable();
+            $("#textareasubmitbtn").link_k_disable();
             if (pageDetailData != undefined && pageDetailData.radio != undefined) {
                 $("input[type='checkbox']").addClass("pagecheckbox").k_disable();
                 $(".checkbox-item").k_disable();
                 $("input[type='radio']").addClass("pageradio");
-                $("#submitbtn").k_disable();
+                $("#submitbtn").link_k_disable();
             }
             if (_Navigator.IsAnswered() && !_Navigator.GetCurrentPage().isStartPage) {
                 this.DisplayUserReviewMode();
@@ -348,7 +348,7 @@ var _ModuleCommon = (function () {
                     $("#submitbtn").k_enable();
                 }
                 else {
-                    $("#submitbtn").k_disable();
+                    $("#submitbtn").link_k_disable();
                 }
             }
 
@@ -372,7 +372,7 @@ var _ModuleCommon = (function () {
 
         },
         OnSubmit: function () {
-            $("input").k_disable();
+            $("input").link_k_disable();
             var currPid = _Navigator.GetCurrentPage().pageId;
             _Navigator.IncrementCounter();
             var pageData = this.GetPageDetailData();
@@ -452,7 +452,7 @@ var _ModuleCommon = (function () {
                     }
                 }
             }
-            $("input").k_disable();
+            $("input").link_k_disable();
             $("#div_feedback").show();
             $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {

@@ -149,7 +149,7 @@ var _Navigator = (function () {
             $("input[type='radio']").k_disable();
             $("input[type='checkbox']").k_disable();
             $("#textareainputhere").k_disable();
-            $("#textareasubmitbtn").k_disable();
+            $("#textareasubmitbtn").link_k_disable();
             $("#linknext").k_enable();
             $(".startbtn").link_k_disable();
         }
@@ -213,7 +213,7 @@ var _Navigator = (function () {
 
             if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity && !this.IsAnswered()) {
                 $("#linknext").link_k_disable();
-                $('#submitbtn').k_disable();
+                $('#submitbtn').link_k_disable();
             }
             if (this.IsAnswered()) {
                 $("#linknext").k_enable();
@@ -269,7 +269,7 @@ var _Navigator = (function () {
                                 $("#Summary").load("pagedata/Summary.htm", function () {
                                     _Assessment.ShowSummary();
                                     if (isChrome && !isAndroid) {
-                                        $("h2.pageheading").attr("tabindex", "0");
+                                        $("h2.pageheading").attr("tabindex", "-1");
                                         $("h2").focus();
                                     }
                                     else {
@@ -283,7 +283,7 @@ var _Navigator = (function () {
                             }
                             else {
                                 _Assessment.ShowQuestion();
-                                $("h2.pageheading").attr("tabindex", "0");
+                                $("h2.pageheading").attr("tabindex", "-1");
                                 $("h2").focus();
                             }
 
@@ -293,7 +293,7 @@ var _Navigator = (function () {
                             _Navigator.UpdateProgressBar();
                         }
                         if (_currentPageObject.hasActivity != undefined && _currentPageObject.hasActivity && !_Navigator.IsAnswered()) {
-                            $('#submitbtn').k_disable();
+                            $('#submitbtn').link_k_disable();
                         }
                         if (_currentPageObject.hinturl == undefined) {
                             $("#hintdiv").hide();
