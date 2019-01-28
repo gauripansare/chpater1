@@ -88,7 +88,7 @@ var _ModuleCommon = (function () {
             var fdkurl = "";
             if (pageData != undefined && reviewData != undefined) {
                 fdkurl = reviewData.fdkurl;
-
+                $("#div_feedback").removeAttr("aria-hidden");
                 $("#div_feedback").show();
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
@@ -102,7 +102,7 @@ var _ModuleCommon = (function () {
                 this.ShowTextareaReviewMode();
                 var reviewData = this.GetPageReviewData();
                 fdkurl = reviewData.fdkurl;
-
+                $("#div_feedback").removeAttr("aria-hidden");
                 $("#div_feedback").show();
                 $("#div_feedback").css("display", "inline-block");
                 $("#div_feedback .div_fdkcontent").load(fdkurl, function () {
@@ -112,7 +112,8 @@ var _ModuleCommon = (function () {
                 $("textarea").k_disable();
             }
             else {
-                $("input").link_k_disable();
+                $('input:not(#submitbtn)').k_disable();
+            $('#submitbtn').link_k_disable();
                 this.DisplayCheckboxCorrectIncorrect();
                 this.ShowFeedbackReviewMode();
             }
@@ -372,7 +373,8 @@ var _ModuleCommon = (function () {
 
         },
         OnSubmit: function () {
-            $("input").link_k_disable();
+            $('input:not(#submitbtn)').k_disable();
+            $('#submitbtn').link_k_disable();
             var currPid = _Navigator.GetCurrentPage().pageId;
             _Navigator.IncrementCounter();
             var pageData = this.GetPageDetailData();
@@ -452,7 +454,9 @@ var _ModuleCommon = (function () {
                     }
                 }
             }
-            $("input").link_k_disable();
+            $("#div_feedback").removeAttr("aria-hidden");
+            $('input:not(#submitbtn)').k_disable();
+            $('#submitbtn').link_k_disable();
             $("#div_feedback").show();
             $("#div_feedback").css("display", "inline-block");
             $("#div_feedback .div_fdkcontent").load(fdbkUrl, function () {
@@ -541,6 +545,7 @@ var _ModuleCommon = (function () {
             $("input[type='radio']").removeClass("incorrect");
             //$("input[type='radio']").next("label").removeAttr("aria-hidden");
             $("#div_feedback .div_fdkcontent").html("");
+            $("#div_feedback").attr("aria-hidden","true");
             $("#div_feedback").hide();
             $(".checkmark").show();
 
