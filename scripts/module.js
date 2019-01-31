@@ -255,6 +255,7 @@ var _ModuleCommon = (function () {
         },
         OnPageLoad: function () {
             var pageDetailData = this.GetPageDetailData();
+            var currentPageData = _Navigator.GetCurrentPage();
             this.ApplycontainerWidth();
             $("#div_feedback").hide();
             $('#hintdiv').hide();
@@ -273,6 +274,9 @@ var _ModuleCommon = (function () {
             }
             if ((/Firefox[\/\s](\d+\.\d+)/.test(navigator.userAgent))) {
                 $('#footer-navigation').css('display', 'table');
+            }
+            if ((isFirefox || isIE11version) && currentPageData.pageId != "p1" && currentPageData.pageId != "p13") {
+                this.FFCustomCheckboxAccessbility();
             }
             /*if (_Navigator.IsPresenterMode()) {
                 this.LoadPresenterMod();
@@ -559,6 +563,9 @@ var _ModuleCommon = (function () {
             else {
                 $("input[type='checkbox']").k_disable();
             }
+            if (isFirefox || isIE11version) {
+                this.FFCustomCheckboxAccessbility();
+            }
         },
         AddReviewData: function (isCorrect, fdkurl) {
             var pageData = this.GetPageDetailData();
@@ -658,6 +665,24 @@ var _ModuleCommon = (function () {
                 $("footer").show();
                 $("#linknext").k_enable();
             }*/
+        },
+        FFCustomCheckboxAccessbility: function () {
+            var radioboxarray = $("input[type='radio']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            for (var i = 0; i < radioboxarray.length; i++) {
+                var aria_label = $("label[for='" + radioboxarray[i] + "']").text();
+                $("label[for='" + radioboxarray[i] + "'] ").attr("aria-hidden", "true");
+                $("#" + radioboxarray[i]).attr("aria-label", aria_label + " Server");
+            }
+            var checkboxarray = $("input[type='checkbox']").map(function () {
+                return $(this).attr("id");
+            }).get();
+            for (var i = 0; i < checkboxarray.length; i++) {
+                var aria_label = $("label[for='" + checkboxarray[i] + "']").text();
+                $("label[for='" + checkboxarray[i] + "'] ").attr("aria-hidden", "true");
+                $("#" + checkboxarray[i]).attr("aria-label", aria_label);
+            }
         },
 
         SetCustomarialabelforRadio: function () {
